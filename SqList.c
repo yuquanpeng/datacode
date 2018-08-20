@@ -105,7 +105,7 @@ void Reverse(SqList &L){
 	}
 }
 void Del_x_1(SqList &L,ElemType x){
-	
+	int k=0;
 }
 
 int main(){
