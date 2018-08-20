@@ -105,7 +105,16 @@ void Reverse(SqList &L){
 	}
 }
 void Del_x_1(SqList &L,ElemType x){
+	//k记录顺序表中不等于x的元素的个数 边扫描边统计
+   //并将不等于x的元素向前放置k位置上
+
 	int k=0;
+    for(int i=0;i<L.length;i++)
+    	if(L.data[i]!=x){
+    		L.data[k] = L.data[i];
+    		k++;
+    }
+    L.length = k;
 }
 
 int main(){
