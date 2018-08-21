@@ -1,4 +1,5 @@
 #include<math.h>
+#include<stdio.h> 
 #define MAXSIZE 50
 /* 各种排序算法测试例子*/
 typedef int KeyType;
