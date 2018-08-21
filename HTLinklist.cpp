@@ -1,5 +1,4 @@
 #include<iostream>
-#include<Windows.h>
 #include<cstring>
 #define TURE 1
 #define OK 0
