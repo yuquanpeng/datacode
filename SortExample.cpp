@@ -1,114 +1,114 @@
 #include<math.h>
 #include<stdio.h> 
 #define MAXSIZE 50
-/* ¸÷ÖÖÅÅĞòËã·¨²âÊÔÀı×Ó*/
+/* å„ç§æ’åºç®—æ³•æµ‹è¯•ä¾‹å­*/
 typedef int KeyType;
 
 #define MAXNUM 100
 typedef struct{
 	KeyType key;
 }RedType;
-RedType R[MAXNUM];//¶¨Òå½á¹¹ÌåÊı×é
+RedType R[MAXNUM];//å®šä¹‰ç»“æ„ä½“æ•°ç»„
 typedef struct{
-	RedType r[MAXSIZE+1];//r[0]ÏĞÖÃ¡¢»òÕßÓÃ×÷ÉÚ±øµ¥Ôª
+	RedType r[MAXSIZE+1];//r[0]é—²ç½®ã€æˆ–è€…ç”¨ä½œå“¨å…µå•å…ƒ
 	int length;
-}Sqlist;//Ë³Ğò±íµÄÀàĞÍ
+}Sqlist;//é¡ºåºè¡¨çš„ç±»å‹
 Sqlist L,L0,L1,L2,L3,L4,L5,L6,L7;	
 typedef Sqlist HeadType;
 
-#define RADIX 10//¹Ø¼ü×ÖµÄ»ùÊı
-#define MAX 8//¹Ø¼ü×ÖÏîÊıµÄ×î´óÖµ
+#define RADIX 10//å…³é”®å­—çš„åŸºæ•°
+#define MAX 8//å…³é”®å­—é¡¹æ•°çš„æœ€å¤§å€¼
 #define MAX_SPACE 10000
 typedef int KeysType;
 typedef struct
 {
-	KeysType keys[MAX];//¹Ø¼ü×Ö
+	KeysType keys[MAX];//å…³é”®å­—
 		int next;
-}SLCell;//¾²Ì¬Á´±íµÄ½ÚµãÀàĞÍ
+}SLCell;//é™æ€é“¾è¡¨çš„èŠ‚ç‚¹ç±»å‹
 typedef struct    
 {  
-    SLCell rl[MAX_SPACE];  //¾²Ì¬Á´±íµÄ¿ÉÀûÓÃ¿Õ¼ä
-    int keynum;  //¼ÇÂ¼µ±Ç°µÄ¹Ø¼ü×Ö¸öÊı
-    int recnum;  //¾²Ì¬Á´±íµÄµ±Ç°³¤¶È
-}SLList;//¾²Ì¬Á´±íµÄÀàĞÍ
+    SLCell rl[MAX_SPACE];  //é™æ€é“¾è¡¨çš„å¯åˆ©ç”¨ç©ºé—´
+    int keynum;  //è®°å½•å½“å‰çš„å…³é”®å­—ä¸ªæ•°
+    int recnum;  //é™æ€é“¾è¡¨çš„å½“å‰é•¿åº¦
+}SLList;//é™æ€é“¾è¡¨çš„ç±»å‹
 
 typedef int ArrType[RADIX];
-int compare[8];//ÓÃÀ´¼ÇÂ¼±È½ÏµÄ´ÎÊı
-int change[8];//ÓÃÀ´±È½Ï½»»»µÄ´ÎÊı 
-void shuRu(Sqlist &L){//Êı¾İÂ¼ÈëË³Ğò±í
+int compare[8];//ç”¨æ¥è®°å½•æ¯”è¾ƒçš„æ¬¡æ•°
+int change[8];//ç”¨æ¥æ¯”è¾ƒäº¤æ¢çš„æ¬¡æ•° 
+void shuRu(Sqlist &L){//æ•°æ®å½•å…¥é¡ºåºè¡¨
 	int i=1,n;
-	printf("ÇëÊäÈëÄãÊäÈëµÄÊı¾İ¸öÊı : \n");
+	printf("è¯·è¾“å…¥ä½ è¾“å…¥çš„æ•°æ®ä¸ªæ•° : \n");
 	scanf("%d",&n);
-	printf("ÇëÒÀ´ÎµÄÊäÈë¸÷¸öÊı¾İÖµ\n");
+	printf("è¯·ä¾æ¬¡çš„è¾“å…¥å„ä¸ªæ•°æ®å€¼\n");
 	L.length = n;
 	for(;i<=L.length;i++){
 		scanf("%d",&L.r[i]);
 	}
 }
-void shuChu(Sqlist &L){//Êä³öË³Ğò±íÖĞµÄÔªËØ
+void shuChu(Sqlist &L){//è¾“å‡ºé¡ºåºè¡¨ä¸­çš„å…ƒç´ 
 	int i=1;
-	printf("¸ÃË³Ğò´æ´¢ÖĞµÄÊı¾İÔªËØÎª£º");
+	printf("è¯¥é¡ºåºå­˜å‚¨ä¸­çš„æ•°æ®å…ƒç´ ä¸ºï¼š");
 	for(;i<L.length;i++){
 		printf("%d ",L.r[i]);
 	}
 	printf("%d\n\n",L.r[i]);
 }
-//==========================================¼òµ¥Ñ¡ÔñÅÅĞò======================
-int SelectMinKey(Sqlist &L,int i){//ÔÚL.r[iµ½length]ÖĞÕÒµ½×îĞ¡ÖµµÄ¼ÇÂ¼
+//==========================================ç®€å•é€‰æ‹©æ’åº======================
+int SelectMinKey(Sqlist &L,int i){//åœ¨L.r[iåˆ°length]ä¸­æ‰¾åˆ°æœ€å°å€¼çš„è®°å½•
 	int k;
 	compare[0] += L.length-i;
 	for(k=i;i<=L.length;i++){
-		compare[0]++;//¼ÇÂ¼µÄÊÇiÓëlengthµÄ±È½Ï
-		compare[0]++;//ÏÂÃæµÄÑ¡ÔñÓï¾äÖĞµÄ±È½Ï
+		compare[0]++;//è®°å½•çš„æ˜¯iä¸lengthçš„æ¯”è¾ƒ
+		compare[0]++;//ä¸‹é¢çš„é€‰æ‹©è¯­å¥ä¸­çš„æ¯”è¾ƒ
 		if(L.r[i].key<L.r[k].key){k=i;change[0]++;}
 	}
 	return k;
 }
 
-void SelectSort(Sqlist &L){//Ë³Ğò±íµÄ¼òµ¥Ñ¡ÔñÅÅĞò²Ù×÷
+void SelectSort(Sqlist &L){//é¡ºåºè¡¨çš„ç®€å•é€‰æ‹©æ’åºæ“ä½œ
 	int i,j,temp;
 	for(i=1;i<L.length;++i){
-		compare[0]++;//¼ÇÂ¼µÄÊÇiÓëlengthµÄ±È½Ï
+		compare[0]++;//è®°å½•çš„æ˜¯iä¸lengthçš„æ¯”è¾ƒ
 		j = SelectMinKey(L,i);
 		compare[0]++;
 		if(i!=j){
 		temp=L.r[i].key;L.r[i].key=L.r[j].key;L.r[j].key=temp;
-		change[0]+=3;//½»»»´ÎÊı¼Ó3
+		change[0]+=3;//äº¤æ¢æ¬¡æ•°åŠ 3
 		}
 	}
 }
-//======================================Ö±½Ó²åÈëÅÅĞò=================================
+//======================================ç›´æ¥æ’å…¥æ’åº=================================
 
-void inserSort(Sqlist &L){//Ö±½Ó²åÈëÅÅĞò
+void inserSort(Sqlist &L){//ç›´æ¥æ’å…¥æ’åº
 	int j;
 	for(int i = 2 ; i<=L.length; ++i) {
-		compare[1]++;//iÓëlength
-		compare[1]++;//¼ÇÂ¼µÄÊÇÏÂÃæÑ¡ÔñÓï¾äµÄ±È½Ï
+		compare[1]++;//iä¸length
+		compare[1]++;//è®°å½•çš„æ˜¯ä¸‹é¢é€‰æ‹©è¯­å¥çš„æ¯”è¾ƒ
 		if(L.r[i].key<L.r[i-1].key){	
-			L.r[0] = L.r[i];//¸´ÖÆÎª¼àÊÓÉÚ
+			L.r[0] = L.r[i];//å¤åˆ¶ä¸ºç›‘è§†å“¨
 			L.r[i] = L.r[i-1];
-			change[1]+=2;//¼àÊÓÉÚµÄ¸³Öµ£¬ÒÔ¼°Î»ÖÃµÄºóÒÆ£¬½»»»´ÎÊı×Ô¼Ó£»
+			change[1]+=2;//ç›‘è§†å“¨çš„èµ‹å€¼ï¼Œä»¥åŠä½ç½®çš„åç§»ï¼Œäº¤æ¢æ¬¡æ•°è‡ªåŠ ï¼›
 			for(j = i-2;j>0;j--){
-				compare[1]++;//forÑ­»·ÖĞµÄ±È½Ï
-				compare[1]++;//¼ÇÂ¼µÄÊÇÏÂÃæÀ¨ºÅÖĞÒª½øĞĞµÄ±È½Ï
+				compare[1]++;//forå¾ªç¯ä¸­çš„æ¯”è¾ƒ
+				compare[1]++;//è®°å½•çš„æ˜¯ä¸‹é¢æ‹¬å·ä¸­è¦è¿›è¡Œçš„æ¯”è¾ƒ
 				if(L.r[0].key>=L.r[j].key) break;	
-				L.r[j+1] = L.r[j];//¼ÇÂ¼ºóÒÆ	
-				change[1]++;//Î»ÖÃºóÒÆ£¬½»»»´ÎÊı¼Ó1
+				L.r[j+1] = L.r[j];//è®°å½•åç§»	
+				change[1]++;//ä½ç½®åç§»ï¼Œäº¤æ¢æ¬¡æ•°åŠ 1
 			}
-			L.r[j+1] = L.r[0];//²åÈëµ½ÕıÈ·Î»ÖÃ
+			L.r[j+1] = L.r[0];//æ’å…¥åˆ°æ­£ç¡®ä½ç½®
 			change[1]++;
 		}
 	}
 }
-//========================================Ã°ÅİÅÅĞò=============================
+//========================================å†’æ³¡æ’åº=============================
 
-void BubbleSort(Sqlist &L){//Ã°ÅİÅÅĞò
+void BubbleSort(Sqlist &L){//å†’æ³¡æ’åº
 	int i,j,temp;
 	for(i=1;i<=L.length;i++){
-		compare[2]++;//¼ÇÂ¼ÉÏÃæµÄforÑ­»·
+		compare[2]++;//è®°å½•ä¸Šé¢çš„forå¾ªç¯
 		for(j=1;j<=L.length-i;j++){
-			compare[2]++;//ÉÏÃæµÄforÑ­»·µÄ±È½Ï
-			compare[2]++;//ÏÂÃæÑ¡ÔñµÄ±È½Ï
+			compare[2]++;//ä¸Šé¢çš„forå¾ªç¯çš„æ¯”è¾ƒ
+			compare[2]++;//ä¸‹é¢é€‰æ‹©çš„æ¯”è¾ƒ
 			if(L.r[j].key>L.r[j+1].key){
 				temp = L.r[j].key;
 				L.r[j].key=L.r[j+1].key;
@@ -119,52 +119,52 @@ void BubbleSort(Sqlist &L){//Ã°ÅİÅÅĞò
 	}
 }
 
-//========================================Ï£¶ûÅÅĞò===================================
+//========================================å¸Œå°”æ’åº===================================
 
-void ShellInsert(Sqlist &L, int dk){//ÒÔÔöÁ¿dk×öÒ»´ÎÏ£¶û²åÈëÅÅĞò
-	//Ç°ºó¼ÇÂ¼µÄÔöÁ¿Ê½dk£¬r[0]×÷ÎªµÄÊÇÒ»¸öÔİ´æµ¥Ôª£¬¶ø²»ÊÇÉÚ±ø£¬µ±j<=0Ê±ºò£¬±íÊ¾²åÈëÎ»ÖÃÕÒµ½
+void ShellInsert(Sqlist &L, int dk){//ä»¥å¢é‡dkåšä¸€æ¬¡å¸Œå°”æ’å…¥æ’åº
+	//å‰åè®°å½•çš„å¢é‡å¼dkï¼Œr[0]ä½œä¸ºçš„æ˜¯ä¸€ä¸ªæš‚å­˜å•å…ƒï¼Œè€Œä¸æ˜¯å“¨å…µï¼Œå½“j<=0æ—¶å€™ï¼Œè¡¨ç¤ºæ’å…¥ä½ç½®æ‰¾åˆ°
 	int i,j;
 	for(i = dk+1; i<=L.length; ++i){
-		compare[3]++;//ÉÏÃæµÄforÑ­»·Ìõ¼ş±È½Ï
-		compare[3]++;//ÏÂÃæµÄÑ¡Ôñ±È½Ï
+		compare[3]++;//ä¸Šé¢çš„forå¾ªç¯æ¡ä»¶æ¯”è¾ƒ
+		compare[3]++;//ä¸‹é¢çš„é€‰æ‹©æ¯”è¾ƒ
 		if(L.r[i].key<L.r[i-dk].key){
-			L.r[0] = L.r[i];//Ôİ´æÔÚL.r[0]
+			L.r[0] = L.r[i];//æš‚å­˜åœ¨L.r[0]
 			change[3]++;
 			for(j=i-dk; j>0; j-=dk)
-			{compare[3]++;//forÑ­»·
-				compare[3]++;//ÏÂÃæµÄ±È½Ï
+			{compare[3]++;//forå¾ªç¯
+				compare[3]++;//ä¸‹é¢çš„æ¯”è¾ƒ
 				if(L.r[0].key>L.r[j].key) break;
-				L.r[j+dk] = L.r[j];//¼ÇÂ¼ºóÒÆ£¬²éÕÒ²åÈëÎ»ÖÃ
+				L.r[j+dk] = L.r[j];//è®°å½•åç§»ï¼ŒæŸ¥æ‰¾æ’å…¥ä½ç½®
 				change[3]++;
 			}
-			L.r[j+dk] = L.r[0];//²åÈë
+			L.r[j+dk] = L.r[0];//æ’å…¥
 			change[3]++;
 		}
 	}
 }
 
-void ShellSort(Sqlist &L){//°´ÔöÁ¿ĞòÁĞ¶ÔÊéĞò±íL×öÏ£¶ûÅÅĞò
+void ShellSort(Sqlist &L){//æŒ‰å¢é‡åºåˆ—å¯¹ä¹¦åºè¡¨Låšå¸Œå°”æ’åº
 	int k;
 	int dlta[] = {5,3,2,1};
 	int t = 4;
 	for(k=0;k<t;++k){
-		compare[3]++;//forÑ­»·
+		compare[3]++;//forå¾ªç¯
 		ShellInsert(L,dlta[k]);
 	}
 }
-//=========================¿ìËÙÅÅĞò===================================
+//=========================å¿«é€Ÿæ’åº===================================
 int Partition(Sqlist &L,int low ,int high){
-	//½»»»Ë³Ğò±íLÖĞ×Ö±íµÄr[low   hingh]µÄ¼ÇÂ¼£¬ÊÇÊàÖá¼ÇÂ¼µ½Î»£¬²¢·µ»ØËùÔÚµÄÎ»ÖÃ£¬´ËÊ±ÔÚËüÖ®Ç°µÄ¼ÇÂ¼¾ù²»´óÓÚËü
+	//äº¤æ¢é¡ºåºè¡¨Lä¸­å­—è¡¨çš„r[low   hingh]çš„è®°å½•ï¼Œæ˜¯æ¢è½´è®°å½•åˆ°ä½ï¼Œå¹¶è¿”å›æ‰€åœ¨çš„ä½ç½®ï¼Œæ­¤æ—¶åœ¨å®ƒä¹‹å‰çš„è®°å½•å‡ä¸å¤§äºå®ƒ
 	KeyType pivotkey;
 	L.r[0] = L.r[low];
 	pivotkey = L.r[low].key;
 	change[4]++;
 	while(low<high){
-		compare[4]++;//¼ÇÂ¼µÄÊÇÉÏÃæµÄwhileÑ­»·µÄÌõ¼şÅĞ¶Ï
-		compare[4]++;//¼ÇÂ¼ÏÂÃæµÄÑ­»·Ôö¼ÓµÄÖÕÖ¹
+		compare[4]++;//è®°å½•çš„æ˜¯ä¸Šé¢çš„whileå¾ªç¯çš„æ¡ä»¶åˆ¤æ–­
+		compare[4]++;//è®°å½•ä¸‹é¢çš„å¾ªç¯å¢åŠ çš„ç»ˆæ­¢
 		while(low<high&&L.r[high].key>=pivotkey) {--high;compare[4]++;}
 		L.r[low] = L.r[high];change[4]++;
-		compare[4]++;//¼ÇÂ¼ÏÂÃæµÄÑ­»·Ôö¼ÓµÄÖÕÖ¹
+		compare[4]++;//è®°å½•ä¸‹é¢çš„å¾ªç¯å¢åŠ çš„ç»ˆæ­¢
 		while(low<high&&L.r[low].key<=pivotkey) {++low;compare[4]++;}
 		L.r[high] = L.r[low];change[4]++;
 	}
@@ -173,7 +173,7 @@ int Partition(Sqlist &L,int low ,int high){
 	return low;
 }
 
-void Qsort(Sqlist &L,int low, int high){//¶ÔË³Ğò±íLÖĞµÄ×ÓĞòÁĞ×ö¿ìËÙÅÅĞò
+void Qsort(Sqlist &L,int low, int high){//å¯¹é¡ºåºè¡¨Lä¸­çš„å­åºåˆ—åšå¿«é€Ÿæ’åº
 	int pivotloc;
 	if(low<high){
 		pivotloc = Partition(L,low,high);
@@ -181,17 +181,17 @@ void Qsort(Sqlist &L,int low, int high){//¶ÔË³Ğò±íLÖĞµÄ×ÓĞòÁĞ×ö¿ìËÙÅÅĞò
 		Qsort(L,pivotloc+1,high);
 	}
 }
-void QuickSort(Sqlist &L){//¶ÔË³Ğò±í×ö¿ìËÙÅÅĞò
+void QuickSort(Sqlist &L){//å¯¹é¡ºåºè¡¨åšå¿«é€Ÿæ’åº
 	Qsort(L,1,L.length);
 }
-//======================¶ÑÅÅĞò===========================================
+//======================å †æ’åº===========================================
 
 void HeadAdjust(HeadType &H , int s, int m ){
 	RedType rc;
 	int j;
 	rc = H.r[s];
 	for(j = 2*s; j<=m; j*=2){
-		compare[5]++;//forÑ­»·µÄµ÷½ÌÅĞ¶Ï
+		compare[5]++;//forå¾ªç¯çš„è°ƒæ•™åˆ¤æ–­
 		if(j<m&&(compare[5]++)&&(H.r[j].key < H.r[j+1].key)) ++j;
 		if(rc.key > H.r[j].key ) {compare[5]++;break;}
 		H.r[s] = H.r[j]; s = j;
@@ -199,26 +199,26 @@ void HeadAdjust(HeadType &H , int s, int m ){
 	}
 	H.r[s] = rc;
 	change[5]++;
-}//²åÈë
-void HeadSort(HeadType &H){//¶ÔË³Ğò±í½øĞĞ¶ÑÅÅĞò
-	RedType temp;//ÖĞ¼ä±äÁ¿ÓÃÓÚ±£´æÊıÖµ£¬
+}//æ’å…¥
+void HeadSort(HeadType &H){//å¯¹é¡ºåºè¡¨è¿›è¡Œå †æ’åº
+	RedType temp;//ä¸­é—´å˜é‡ç”¨äºä¿å­˜æ•°å€¼ï¼Œ
 	for(int i = H.length/2 ; i>0; --i){
 		compare[5]++;
-		HeadAdjust(H,i,H.length);//ºóĞøµÄµ÷Õû
+		HeadAdjust(H,i,H.length);//åç»­çš„è°ƒæ•´
 	}
 	for(int i=H.length;i>1;--i){
 		compare[5]++;
-		temp=H.r[1]; H.r[1]=H.r[i]; H.r[i]=temp;//×îºóµÄÒ»´Î¼ÇÂ¼Ïà»¥½»»»
+		temp=H.r[1]; H.r[1]=H.r[i]; H.r[i]=temp;//æœ€åçš„ä¸€æ¬¡è®°å½•ç›¸äº’äº¤æ¢
 		change[5]+=3;
-		HeadAdjust(H,1,i-1);//µÚÒ»´ÎµÄµ÷Õû
+		HeadAdjust(H,1,i-1);//ç¬¬ä¸€æ¬¡çš„è°ƒæ•´
 	}
 }
 
-//==============================¹é²¢ÅÅĞò=================================
+//==============================å½’å¹¶æ’åº=================================
 void Merge(RedType SR[],RedType TR[],int i,int m,int n){
 	int j,k;
 	for(j=m+1,k=i;i<=m&&j<=n;k++){
-		compare[6]+=2;//forÑ­»·ÖĞµÄÁ½¸öÌõ¼şÅĞ¶Ï
+		compare[6]+=2;//forå¾ªç¯ä¸­çš„ä¸¤ä¸ªæ¡ä»¶åˆ¤æ–­
 		if(SR[i].key<SR[j].key) {change[6]++;TR[k] = SR[i++];}
 		else {change[6]++;TR[k] =SR[j++];}
 	}
@@ -237,7 +237,7 @@ void MSort(RedType SR[],RedType TR1[],int s,int t){
 	int m;
 	RedType TR2[MAXSIZE+1];
 	if(s==t) {
-		compare[6]++;//Ìõ¼şµÄÅĞ¶Ï
+		compare[6]++;//æ¡ä»¶çš„åˆ¤æ–­
 		TR1[s]=SR[s];
 		change[6]++;
 	}
@@ -252,7 +252,7 @@ void MSort(RedType SR[],RedType TR1[],int s,int t){
 void MergeSort(Sqlist &L){
 	MSort(L.r,L.r,1,L.length);
 }
-//===============================»ùÊıÅÅĞò==========================
+//===============================åŸºæ•°æ’åº==========================
 void CreatSLList(SLList &LK,Sqlist &L){
 	int i,j;
     for(i=1;i<=L.length;i++){
@@ -260,25 +260,25 @@ void CreatSLList(SLList &LK,Sqlist &L){
 		R[i].key=L.r[i].key;
 	}
 	LK.recnum = L.length;
-	LK.keynum = 3;//ÉèÖÃÎªÈıÎ»ÊıµÄ±È½Ï
-	for(i=1;i<=LK.recnum;i++)  //½«¸ø¶¨µÄÊı×Ö°´ÕÕÈıÎ»ÊıµÄ¸ñÊ½½øĞĞ²ğ·Ö¡£°ÙÎ»¡¢Ê®Î»¡¢¸öÎ»
+	LK.keynum = 3;//è®¾ç½®ä¸ºä¸‰ä½æ•°çš„æ¯”è¾ƒ
+	for(i=1;i<=LK.recnum;i++)  //å°†ç»™å®šçš„æ•°å­—æŒ‰ç…§ä¸‰ä½æ•°çš„æ ¼å¼è¿›è¡Œæ‹†åˆ†ã€‚ç™¾ä½ã€åä½ã€ä¸ªä½
     { 
 		compare[7]++;
         j=LK.keynum-1;
-		change[7]+=3;//ÏÂÃæµÄÈı¸öÊ½×Ó
-		LK.rl[i].keys[j--]=R[i].key/100;//»ñÈ¡µÄÊÇ×î¸ßÎ»µÄ£¬±¾Ê¾ÀıÖĞµÄÊÇ°ÙÎ»ÉÏµÄÊı×Ö		
-		LK.rl[i].keys[j--]=(R[i].key%100)/10;//»ñÈ¡µÄÊÇÊ®Î»ÉÏµÄÊı×Ö
-		LK.rl[i].keys[j]=R[i].key%10;//»ñÈ¡µÄÊÇ¸öÎ»ÉÏµÄÊıÖµ 
+		change[7]+=3;//ä¸‹é¢çš„ä¸‰ä¸ªå¼å­
+		LK.rl[i].keys[j--]=R[i].key/100;//è·å–çš„æ˜¯æœ€é«˜ä½çš„ï¼Œæœ¬ç¤ºä¾‹ä¸­çš„æ˜¯ç™¾ä½ä¸Šçš„æ•°å­—		
+		LK.rl[i].keys[j--]=(R[i].key%100)/10;//è·å–çš„æ˜¯åä½ä¸Šçš„æ•°å­—
+		LK.rl[i].keys[j]=R[i].key%10;//è·å–çš„æ˜¯ä¸ªä½ä¸Šçš„æ•°å€¼ 
     } 
-	for(i=0;i<LK.recnum;++i){ //½«ËùÓĞµÄÁ´±íÓÃÁ´±íÁ¬½ÓÆğÀ´£¬¹¹³É¶şÎ¬µÄÁ´±í
+	for(i=0;i<LK.recnum;++i){ //å°†æ‰€æœ‰çš„é“¾è¡¨ç”¨é“¾è¡¨è¿æ¥èµ·æ¥ï¼Œæ„æˆäºŒç»´çš„é“¾è¡¨
         LK.rl[i].next=i+1;
 	}
-	 LK.rl[LK.recnum].next=0;//Á´±íÑ­»·
+	 LK.rl[LK.recnum].next=0;//é“¾è¡¨å¾ªç¯
 	 change[7]++;
 }
-void Distribute(SLCell (&r)[MAX_SPACE],int i,ArrType &f,ArrType &e) {//µÚiÌË·ÖÅä
+void Distribute(SLCell (&r)[MAX_SPACE],int i,ArrType &f,ArrType &e) {//ç¬¬iè¶Ÿåˆ†é…
 	int j,p;	
-	for(j=0;j<RADIX;j++) {compare[7]++;f[j] =0;}//¸÷×Ó±í³õÊ¼»¯Îª¿Õ±í
+	for(j=0;j<RADIX;j++) {compare[7]++;f[j] =0;}//å„å­è¡¨åˆå§‹åŒ–ä¸ºç©ºè¡¨
 	for(p=r[0].next; p; p=r[p].next){
 		j = r[p].keys[i];
 		change[7]++;
@@ -288,11 +288,11 @@ void Distribute(SLCell (&r)[MAX_SPACE],int i,ArrType &f,ArrType &e) {//µÚiÌË·ÖÅä
 		e[j] =p;change[7]++;
 	}
 }
-void Collect(SLCell (&r)[MAX_SPACE],int i,ArrType f,ArrType e) //»ùÊıÅÅĞò 
+void Collect(SLCell (&r)[MAX_SPACE],int i,ArrType f,ArrType e) //åŸºæ•°æ’åº 
 {  
     int j,t;  
-    for(j=0;!f[j];j++);//ÕÒµÚÒ»¸ö·Ç¿ÕµÄ×Ó±í
-	r[0].next=f[j];//r[0]µÄnextÖ¸ÏòµÚÒ»¸ö·Ç¿Õ×Ó±íµÄµÚÒ»¸ö½áµã
+    for(j=0;!f[j];j++);//æ‰¾ç¬¬ä¸€ä¸ªéç©ºçš„å­è¡¨
+	r[0].next=f[j];//r[0]çš„nextæŒ‡å‘ç¬¬ä¸€ä¸ªéç©ºå­è¡¨çš„ç¬¬ä¸€ä¸ªç»“ç‚¹
     t=e[j];change[7]+=2;
     while (j<RADIX-1)   
     { 
@@ -312,20 +312,20 @@ void Collect(SLCell (&r)[MAX_SPACE],int i,ArrType f,ArrType e) //»ùÊıÅÅĞò
 void RadixSort(SLList &L){
 	ArrType f,e; 
 	for(int i=0;i<L.recnum;++i) {compare[7]++;L.rl[i].next = i+1;change[7]++;}
-	L.rl[L.recnum].next = 0;//½«L¸ÄÔìÎªÒ»¸ö¾²Ì¬µÄÁ´±í
+	L.rl[L.recnum].next = 0;//å°†Læ”¹é€ ä¸ºä¸€ä¸ªé™æ€çš„é“¾è¡¨
 	change[7]++;
-	for(int i=0;i<L.keynum;++i){//°´ÕÕ×îµÍÎ»ÓÅÏÈÒ»´Î¶Ô¸÷¸ö¹Ø¼ü×Ö½øĞĞ·ÖÅäºÍÊÕ¼¯
+	for(int i=0;i<L.keynum;++i){//æŒ‰ç…§æœ€ä½ä½ä¼˜å…ˆä¸€æ¬¡å¯¹å„ä¸ªå…³é”®å­—è¿›è¡Œåˆ†é…å’Œæ”¶é›†
 		compare[7]++;
-		Distribute(L.rl,i,f,e);//µÚiÌË·ÖÅä
-		Collect(L.rl,i,f,e);//µÚiÌËµÄÊÕ¼¯
+		Distribute(L.rl,i,f,e);//ç¬¬iè¶Ÿåˆ†é…
+		Collect(L.rl,i,f,e);//ç¬¬iè¶Ÿçš„æ”¶é›†
 	}
 }
 void print(SLList &L){
 	int i;
-	printf("ÅÅĞòµÄ½á¹ûÎª£º");
-	for(i=L.rl[0].next;i;i=L.rl[i].next) //×ÜµÄ´óµÄÁ´±íµÄÑ­»· 
+	printf("æ’åºçš„ç»“æœä¸ºï¼š");
+	for(i=L.rl[0].next;i;i=L.rl[i].next) //æ€»çš„å¤§çš„é“¾è¡¨çš„å¾ªç¯ 
     {   compare[7]++;
-        for(int j=L.keynum-1;j>=0;j--) //¿ØÖÆÊä³öÒ»¸öÊı¾İ
+        for(int j=L.keynum-1;j>=0;j--) //æ§åˆ¶è¾“å‡ºä¸€ä¸ªæ•°æ®
 		{compare[7]++;
             printf("%d",L.rl[i].keys[j]); 
 		}
@@ -333,7 +333,7 @@ void print(SLList &L){
     }  
     printf("\n");  
 }  
-//===============================Á´±í¸´ÖÆ²Ù×÷=============================
+//===============================é“¾è¡¨å¤åˆ¶æ“ä½œ=============================
 void Copy(Sqlist &L){
 	L0.length=L.length;L1.length=L.length;L2.length=L.length;
 	L3.length=L.length;L4.length=L.length;
@@ -346,66 +346,66 @@ void Copy(Sqlist &L){
 		L7.r[i].key=L.r[i].key;L0.r[i].key=L.r[i].key;
 	}
 }
-//=====================Ö÷²Ëµ¥=======================================
+//=====================ä¸»èœå•=======================================
 void Menu(){
-	printf("\t===================»¶Ó­Ê¹ÓÃÅÅĞòĞÔÄÜ±È½ÏÈí¼ş=====================\t\n\n");
-	printf("\tÇëÑ¡ÔñÄãÒª½øĞĞµÄ²Ù×÷:\t\n\n");
-	printf("\t1:  ²úÉúÍêÈ«Ëæ»úµÄÊı¾İÔÙ½øĞĞÅÅĞò\t\n");
-	printf("\t2£º ×ÔĞĞÊäÈëÒ»Ğ©Êı¾İÔÙÊµÏÖÅÅĞò²Ù×÷\t\n");
-	printf("\t3£º ²úÉúµÄÊÇÒ»×éËæ»úµÄÄæĞòÊı¾İÔÙ½øĞĞÅÅĞò\t\n");
-	printf("\t0:  ÍË³ö³ÌĞò\t\n");
-	printf("\tÎªÁË²âÊÔµÄÕı³£½øĞĞ£¬ÇëÑ¡ÔñÕıÈ·µÄÊäÈëĞÎÊ½\t\n");
+	printf("\t===================æ¬¢è¿ä½¿ç”¨æ’åºæ€§èƒ½æ¯”è¾ƒè½¯ä»¶=====================\t\n\n");
+	printf("\tè¯·é€‰æ‹©ä½ è¦è¿›è¡Œçš„æ“ä½œ:\t\n\n");
+	printf("\t1:  äº§ç”Ÿå®Œå…¨éšæœºçš„æ•°æ®å†è¿›è¡Œæ’åº\t\n");
+	printf("\t2ï¼š è‡ªè¡Œè¾“å…¥ä¸€äº›æ•°æ®å†å®ç°æ’åºæ“ä½œ\t\n");
+	printf("\t3ï¼š äº§ç”Ÿçš„æ˜¯ä¸€ç»„éšæœºçš„é€†åºæ•°æ®å†è¿›è¡Œæ’åº\t\n");
+	printf("\t0:  é€€å‡ºç¨‹åº\t\n");
+	printf("\tä¸ºäº†æµ‹è¯•çš„æ­£å¸¸è¿›è¡Œï¼Œè¯·é€‰æ‹©æ­£ç¡®çš„è¾“å…¥å½¢å¼\t\n");
 }
-//========================Êä³ö±È½Ï´ÎÊıºÍ½»»»´ÎÊıµÄ±í¸ñ=================
+//========================è¾“å‡ºæ¯”è¾ƒæ¬¡æ•°å’Œäº¤æ¢æ¬¡æ•°çš„è¡¨æ ¼=================
 void Table(){
 	printf("\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\t\n");
-	printf("\t=Ëã·¨Ãû³Æ====================±È½Ï´ÎÊı================½»»»´ÎÊı=====\t\n");
-	printf("\t1¼òµ¥Ñ¡ÔñÅÅĞò             \t%d\t                    %d            \t\n",compare[0],change[0]);
-	printf("\t2Ö±½Ó²åÈëÅÅĞò             \t%d\t                    %d            \t\n",compare[1],change[1]);
-	printf("\t3  Ã°ÅİÅÅĞò               \t%d\t                    %d            \t\n",compare[2],change[2]);
-	printf("\t4  Ï£¶ûÅÅĞò               \t%d\t                    %d            \t\n",compare[3],change[3]);
-	printf("\t5¿ìËÙÑ¡ÔñÅÅĞò             \t%d\t                    %d            \t\n",compare[4],change[4]);
-	printf("\t6  ¶Ñ ÅÅ Ğò               \t%d\t                    %d            \t\n",compare[5],change[5]);
-	printf("\t7  ¹é²¢ÅÅĞò               \t%d\t                    %d            \t\n",compare[6],change[6]);
-	printf("\t8  »ùÊıÅÅĞò               \t%d\t                    %d            \t\n",compare[7],change[7]);
+	printf("\t=ç®—æ³•åç§°====================æ¯”è¾ƒæ¬¡æ•°================äº¤æ¢æ¬¡æ•°=====\t\n");
+	printf("\t1ç®€å•é€‰æ‹©æ’åº             \t%d\t                    %d            \t\n",compare[0],change[0]);
+	printf("\t2ç›´æ¥æ’å…¥æ’åº             \t%d\t                    %d            \t\n",compare[1],change[1]);
+	printf("\t3  å†’æ³¡æ’åº               \t%d\t                    %d            \t\n",compare[2],change[2]);
+	printf("\t4  å¸Œå°”æ’åº               \t%d\t                    %d            \t\n",compare[3],change[3]);
+	printf("\t5å¿«é€Ÿé€‰æ‹©æ’åº             \t%d\t                    %d            \t\n",compare[4],change[4]);
+	printf("\t6  å † æ’ åº               \t%d\t                    %d            \t\n",compare[5],change[5]);
+	printf("\t7  å½’å¹¶æ’åº               \t%d\t                    %d            \t\n",compare[6],change[6]);
+	printf("\t8  åŸºæ•°æ’åº               \t%d\t                    %d            \t\n",compare[7],change[7]);
 	printf("\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\t\n");
 }
 
-//=====================================ÓÃÓÚÏµÍ³²úÉúËæ»úÊıµÄÇé¿ö===============
+//=====================================ç”¨äºç³»ç»Ÿäº§ç”Ÿéšæœºæ•°çš„æƒ…å†µ===============
 void Random(Sqlist &L){
 	SLList LK;
 	for(int i =0;i<8;i++){
 		compare[i]=0;
 		change[i]=0;
 	}
-	a:printf("ÇëÊäÈëÄã²úÉúµÄËæ»úÊıµÄÊı¾İ¸öÊı : ");
+	a:printf("è¯·è¾“å…¥ä½ äº§ç”Ÿçš„éšæœºæ•°çš„æ•°æ®ä¸ªæ•° : ");
 	scanf("%d",&L.length);
 	if(L.length>50){
-		printf("Çë½«ÊäÈëµÄ¸öÊıÏŞÖÆÔÚ50Ö®ÄÚ£¬ÇëÖØĞÂÊäÈë!\n");
+		printf("è¯·å°†è¾“å…¥çš„ä¸ªæ•°é™åˆ¶åœ¨50ä¹‹å†…ï¼Œè¯·é‡æ–°è¾“å…¥!\n");
 		goto a;
 	}
 	for(int i=1;i<=L.length;i++) {
-		L.r[i].key =1+(int )(1000.0*rand()/(RAND_MAX+1.0));//Ëæ»úÉú³É1000ÒÔÄÚµÄÕûÊı
+		L.r[i].key =1+(int )(1000.0*rand()/(RAND_MAX+1.0));//éšæœºç”Ÿæˆ1000ä»¥å†…çš„æ•´æ•°
 	}
-	printf("ÅÅĞòÖ®Ç°µÄËæ»úÉú³ÉµÄ%d¸öÊıÊÇ:\n",L.length);
+	printf("æ’åºä¹‹å‰çš„éšæœºç”Ÿæˆçš„%dä¸ªæ•°æ˜¯:\n",L.length);
 	for(int i=1;i<=L.length;i++) printf("%d  ",L.r[i].key);
 	Copy(L);
-	printf("\nÏÂÃæÖ´ĞĞµÄÊÇ¸÷¸öÅÅĞòµÄÔËĞĞÇé¿ö\n");
-	SelectSort(L0);//¼òµ¥Ñ¡ÔñÅÅĞò
-	printf("ÅÅĞòÖ®ºóµÄÔªËØ£º\n");
+	printf("\nä¸‹é¢æ‰§è¡Œçš„æ˜¯å„ä¸ªæ’åºçš„è¿è¡Œæƒ…å†µ\n");
+	SelectSort(L0);//ç®€å•é€‰æ‹©æ’åº
+	printf("æ’åºä¹‹åçš„å…ƒç´ ï¼š\n");
 	shuChu(L0);
-	inserSort(L1);//Ö±½Ó²åÈëÅÅĞò
-	BubbleSort(L2);//Ã°ÅİÅÅĞò
-	ShellSort(L3);//Ï£¶ûÅÅĞò
-	QuickSort(L4);//¿ìËÙÑ¡ÔñÅÅĞò
-	HeadSort(L5);//¶ÑÅÅĞò
-	MergeSort(L6);//¹é²¢ÅÅĞò	
-	CreatSLList(LK,L7);//¶ÔÓÚ¾²Ì¬µÄÁ´±íĞèÒª½øĞĞµÄÊÇÌØÊâ´¦Àí
-	RadixSort(LK);//»ùÊıÅÅĞòµÄ²Ù×÷
-//	print(LK);//ÓÃÀ´²âÊÔµÄÊÇ»ùÊıÅÅĞòµÄÕıÈ·ĞÔ
+	inserSort(L1);//ç›´æ¥æ’å…¥æ’åº
+	BubbleSort(L2);//å†’æ³¡æ’åº
+	ShellSort(L3);//å¸Œå°”æ’åº
+	QuickSort(L4);//å¿«é€Ÿé€‰æ‹©æ’åº
+	HeadSort(L5);//å †æ’åº
+	MergeSort(L6);//å½’å¹¶æ’åº	
+	CreatSLList(LK,L7);//å¯¹äºé™æ€çš„é“¾è¡¨éœ€è¦è¿›è¡Œçš„æ˜¯ç‰¹æ®Šå¤„ç†
+	RadixSort(LK);//åŸºæ•°æ’åºçš„æ“ä½œ
+//	print(LK);//ç”¨æ¥æµ‹è¯•çš„æ˜¯åŸºæ•°æ’åºçš„æ­£ç¡®æ€§
 	Table();
 }
-//=====================ÓÃÓÚÓÃ»§×ÔĞĞµÄÊäÈëÒ»Ğ©ÊıÖµ=================================
+//=====================ç”¨äºç”¨æˆ·è‡ªè¡Œçš„è¾“å…¥ä¸€äº›æ•°å€¼=================================
 void Yonghu(Sqlist &L){
 	SLList LK;
 	for(int i =0;i<8;i++){
@@ -413,72 +413,72 @@ void Yonghu(Sqlist &L){
 		change[i]=0;
 	}
 	shuRu(L);
-	printf("ÄúÊäÈëµÄ%d¸öÊı¾İÊÇ\n",L.length);
+	printf("æ‚¨è¾“å…¥çš„%dä¸ªæ•°æ®æ˜¯\n",L.length);
 	for(int i=1;i<=L.length;i++) 
 		printf("%d  ",L.r[i].key);
 	printf("\n");
 	Copy(L);
-	SelectSort(L0);//¼òµ¥Ñ¡ÔñÅÅĞò
+	SelectSort(L0);//ç®€å•é€‰æ‹©æ’åº
 	shuChu(L0);
-	inserSort(L1);//Ö±½Ó²åÈëÅÅĞò
-	BubbleSort(L2);//Ã°ÅİÅÅĞò
-	ShellSort(L3);//Ï£¶ûÅÅĞò
-	QuickSort(L4);//¿ìËÙÑ¡ÔñÅÅĞò
-	HeadSort(L5);//¶ÑÅÅĞò
-	MergeSort(L6);//¹é²¢ÅÅĞò	
-	CreatSLList(LK,L7);//¶ÔÓÚ¾²Ì¬µÄÁ´±íĞèÒª½øĞĞµÄÊÇÌØÊâ´¦Àí
-	RadixSort(LK);//»ùÊıÅÅĞòµÄ²Ù×÷
-//	print(LK);//ÓÃÀ´²âÊÔµÄÊÇ»ùÊıÅÅĞòµÄÕıÈ·ĞÔ
+	inserSort(L1);//ç›´æ¥æ’å…¥æ’åº
+	BubbleSort(L2);//å†’æ³¡æ’åº
+	ShellSort(L3);//å¸Œå°”æ’åº
+	QuickSort(L4);//å¿«é€Ÿé€‰æ‹©æ’åº
+	HeadSort(L5);//å †æ’åº
+	MergeSort(L6);//å½’å¹¶æ’åº	
+	CreatSLList(LK,L7);//å¯¹äºé™æ€çš„é“¾è¡¨éœ€è¦è¿›è¡Œçš„æ˜¯ç‰¹æ®Šå¤„ç†
+	RadixSort(LK);//åŸºæ•°æ’åºçš„æ“ä½œ
+//	print(LK);//ç”¨æ¥æµ‹è¯•çš„æ˜¯åŸºæ•°æ’åºçš„æ­£ç¡®æ€§
 	Table();
 }
-//=================ÓÃÓÚÏµÍ³²úÉúËæ»úÊıµÄÇé¿ö=================================
+//=================ç”¨äºç³»ç»Ÿäº§ç”Ÿéšæœºæ•°çš„æƒ…å†µ=================================
 void Nixu(Sqlist &L){
 	SLList LK;
-	Sqlist la;//ÓÃÓÚÔİ´æËæ»úÊı£¬
+	Sqlist la;//ç”¨äºæš‚å­˜éšæœºæ•°ï¼Œ
 	int i;
 	for(i =0;i<8;i++){
 		compare[i]=0;
 		change[i]=0;
 	}
-	a:printf("ÇëÊäÈëÄã²úÉúµÄËæ»úÊıµÄ×Ü¸öÊın : ");
+	a:printf("è¯·è¾“å…¥ä½ äº§ç”Ÿçš„éšæœºæ•°çš„æ€»ä¸ªæ•°n : ");
 	scanf("%d",&L.length);
 	if(L.length>50){
-		printf("Çë½«ÊäÈëµÄ¸öÊıÏŞÖÆÔÚ50Ö®ÄÚ£¬ÇëÖØĞÂÊäÈë!\n");
+		printf("è¯·å°†è¾“å…¥çš„ä¸ªæ•°é™åˆ¶åœ¨50ä¹‹å†…ï¼Œè¯·é‡æ–°è¾“å…¥!\n");
 		goto a;		
 	}
 	for(i=1;i<=L.length;i++) {
-		L.r[i].key =1+(int )(1000.0*rand()/(RAND_MAX+1.0));//Ëæ»úÉú³É1000ÒÔÄÚµÄÕûÊı
+		L.r[i].key =1+(int )(1000.0*rand()/(RAND_MAX+1.0));//éšæœºç”Ÿæˆ1000ä»¥å†…çš„æ•´æ•°
 	}
-	inserSort(L);//Ö±½Ó²åÈëÅÅĞòÊ¹µÃËæ»úÊıµİÔöÓĞĞò
+	inserSort(L);//ç›´æ¥æ’å…¥æ’åºä½¿å¾—éšæœºæ•°é€’å¢æœ‰åº
 	la.length=L.length;
 	i=la.length;
-	for(int k=1;i>=1;i--){//½«´ıÅÅµÄÊı¾İ±£´æÔÚLÖĞ£¬²¢Ê¹µÃÆäË³Ğòµİ¼õ
+	for(int k=1;i>=1;i--){//å°†å¾…æ’çš„æ•°æ®ä¿å­˜åœ¨Lä¸­ï¼Œå¹¶ä½¿å¾—å…¶é¡ºåºé€’å‡
 		la.r[k].key = L.r[i].key;
 		k++;
 	}
-	printf("ÄæĞòµÄ%d¸öËæ»úÊıÊÇ£º\n",la.length);
+	printf("é€†åºçš„%dä¸ªéšæœºæ•°æ˜¯ï¼š\n",la.length);
 	shuChu(la);
 	Copy(la);
-	SelectSort(L0);//¼òµ¥Ñ¡ÔñÅÅĞò
+	SelectSort(L0);//ç®€å•é€‰æ‹©æ’åº
 	shuChu(L0);
-	inserSort(L1);//Ö±½Ó²åÈëÅÅĞò
-	BubbleSort(L2);//Ã°ÅİÅÅĞò
-	ShellSort(L3);//Ï£¶ûÅÅĞò
-	QuickSort(L4);//¿ìËÙÑ¡ÔñÅÅĞò
-	HeadSort(L5);//¶ÑÅÅĞò
-	MergeSort(L6);//¹é²¢ÅÅĞò	
-	CreatSLList(LK,L7);//¶ÔÓÚ¾²Ì¬µÄÁ´±íĞèÒª½øĞĞµÄÊÇÌØÊâ´¦Àí
-	RadixSort(LK);//»ùÊıÅÅĞòµÄ²Ù×÷
-//	print(LK);//ÓÃÀ´²âÊÔµÄÊÇ»ùÊıÅÅĞòµÄÕıÈ·ĞÔ
+	inserSort(L1);//ç›´æ¥æ’å…¥æ’åº
+	BubbleSort(L2);//å†’æ³¡æ’åº
+	ShellSort(L3);//å¸Œå°”æ’åº
+	QuickSort(L4);//å¿«é€Ÿé€‰æ‹©æ’åº
+	HeadSort(L5);//å †æ’åº
+	MergeSort(L6);//å½’å¹¶æ’åº	
+	CreatSLList(LK,L7);//å¯¹äºé™æ€çš„é“¾è¡¨éœ€è¦è¿›è¡Œçš„æ˜¯ç‰¹æ®Šå¤„ç†
+	RadixSort(LK);//åŸºæ•°æ’åºçš„æ“ä½œ
+//	print(LK);//ç”¨æ¥æµ‹è¯•çš„æ˜¯åŸºæ•°æ’åºçš„æ­£ç¡®æ€§
 	Table();
 }
-//======================================Ö÷º¯ÊıÓÃÓÚ²âÊÔµÄ===================
+//======================================ä¸»å‡½æ•°ç”¨äºæµ‹è¯•çš„===================
 int main(){
 	int choose;
 
 	for(;;){
 			Menu();
-			printf("\tÇëÑ¡Ôñ£º");
+			printf("\tè¯·é€‰æ‹©ï¼š");
 			scanf("%d",&choose);
 			switch(choose){
 				case 1:Random(L);break;

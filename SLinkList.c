@@ -1,6 +1,6 @@
 #include<stdio.h>
 #define MAXSIZE 5
-/*¾²Ì¬Á´±í
+/*é™æ€é“¾è¡¨
 */
 typedef int ElemType;
 
@@ -26,15 +26,15 @@ void main()
 
 /*int LocateElem_SL(SLinkList *S, ElemType elem)
 {
-	int i = S[0].cur;//IÖ¸Ê¾±íÖĞµÄµÚÒ»¸ö½Úµã
-	while (i && S[i].data != elem)//ÔÚ±íÖĞË³Áª²éÕÒ
+	int i = S[0].cur;//IæŒ‡ç¤ºè¡¨ä¸­çš„ç¬¬ä¸€ä¸ªèŠ‚ç‚¹
+	while (i && S[i].data != elem)//åœ¨è¡¨ä¸­é¡ºè”æŸ¥æ‰¾
 		i = S[i].cur;
 	return i;
 }*/
 
 void InitSpace_SL(SLinkList *space)
 {
-	//½«Ò»Î»Êı×éspaceÖĞ¸÷·ÖÁ¿Á´½Ó³ÉÒ»¸ö±»ÓÃÁ´±í space[0].cur Î»Í·Ö¸Õë
+	//å°†ä¸€ä½æ•°ç»„spaceä¸­å„åˆ†é‡é“¾æ¥æˆä¸€ä¸ªè¢«ç”¨é“¾è¡¨ space[0].cur ä½å¤´æŒ‡é’ˆ
 	for (int i = 0; i<MAXSIZE - 1; i++) 
 	{
 		space[i]->cur = i + 1;
@@ -45,55 +45,55 @@ void InitSpace_SL(SLinkList *space)
 
 int Malloc_SL(SLinkList *space)
 {
-	//·µ»Ø·ÖÅäµÄÔªËØµÄÏÂ±ê
+	//è¿”å›åˆ†é…çš„å…ƒç´ çš„ä¸‹æ ‡
 	int i = space[0]->cur;
 	if (space[0]->cur) space[0]->cur = space[i]->cur;
 	return i;
 }
 void Free_SL(SLinkList *space, int k)
 {
-	//½«ÏÂ±êÎªkµÄ½Úµã»ØÊÕµ½±¸ÓÃÁ´±í
+	//å°†ä¸‹æ ‡ä¸ºkçš„èŠ‚ç‚¹å›æ”¶åˆ°å¤‡ç”¨é“¾è¡¨
 	space[k]->cur = space[0]->cur;
 	space[0]->cur = k;
 }
 void Difference_SL(SLinkList *space, int *S)
 {
-	InitSpace_SL(space);//³õÊ¼»¯±¸ÓÃ¿Õ¼ä
-	*S = Malloc_SL(space);//Éú³ÉSµÄÍ·½áµã
-	int r = S;//rÖ¸ÏòSµÄµ±Ç°×îºó½áµã
-	printf("ÇëÊäÈë¼¯ºÏAºÍ¼¯ºÏBµÄÔªËØ¸öÊı:\n");
+	InitSpace_SL(space);//åˆå§‹åŒ–å¤‡ç”¨ç©ºé—´
+	*S = Malloc_SL(space);//ç”ŸæˆSçš„å¤´ç»“ç‚¹
+	int r = S;//ræŒ‡å‘Sçš„å½“å‰æœ€åç»“ç‚¹
+	printf("è¯·è¾“å…¥é›†åˆAå’Œé›†åˆBçš„å…ƒç´ ä¸ªæ•°:\n");
 	int m, n;
 	scanf_s("%d %d", &m, &n);
 	for (int j = 1; j <= m; j++)
 	{
-		int i = Malloc_SL(space);//·ÖÅä½Úµã
-		scanf_s("%d", &space[i]->data);//ÊäÈëAµÄÔªËØµÄÖµ
+		int i = Malloc_SL(space);//åˆ†é…èŠ‚ç‚¹
+		scanf_s("%d", &space[i]->data);//è¾“å…¥Açš„å…ƒç´ çš„å€¼
 		space[r]->cur = i;  
-		r = i;//²åÈëµ½±íÎ²
+		r = i;//æ’å…¥åˆ°è¡¨å°¾
 	}
-	space[r]->cur = 0;  //AÎ²µãµÄcurÖÃ0
-	for (int j = 1; j <= n; j++) //ÒÀ´ÎÊäÈëBµÄÔªËØ  Èô²»ÔÚµ±Ç°±íÖĞÔò²åÈë ·ñÔòÉ¾³ı
+	space[r]->cur = 0;  //Aå°¾ç‚¹çš„curç½®0
+	for (int j = 1; j <= n; j++) //ä¾æ¬¡è¾“å…¥Bçš„å…ƒç´   è‹¥ä¸åœ¨å½“å‰è¡¨ä¸­åˆ™æ’å…¥ å¦åˆ™åˆ é™¤
 	{
 		int b;
 		scanf_s("%d", &b);
-		int p = S; int k = space[*S]->cur;//½«kÖ¸Ïò¼¯ºÏAÖĞµÄµÚÒ»¸ö½Úµã
-		while (k != space[r]->cur&&space[k]->data != b) //ÔÚµ±Ç°±íÖĞ²éÕÒ
+		int p = S; int k = space[*S]->cur;//å°†kæŒ‡å‘é›†åˆAä¸­çš„ç¬¬ä¸€ä¸ªèŠ‚ç‚¹
+		while (k != space[r]->cur&&space[k]->data != b) //åœ¨å½“å‰è¡¨ä¸­æŸ¥æ‰¾
 		{
 			p = k; k = space[k]->cur;
 		}
-		if (k == space[r]->cur) //µ±Ç°±íÖĞ²»´æÔÚ¸ÆÔªËØ  ²åÈëÔÚrËùÖ¸½áµãÖ®ºó
+		if (k == space[r]->cur) //å½“å‰è¡¨ä¸­ä¸å­˜åœ¨é’™å…ƒç´   æ’å…¥åœ¨ræ‰€æŒ‡ç»“ç‚¹ä¹‹å
 		{
 			int i = Malloc_SL(space);
 			space[i]->data = b;
 			space[i]->cur = space[r]->cur;
-			space[r]->cur = i;//µ±±íÖĞ²»´æÔÚ¸ÃÔªËØ£¬²åÈërËùÖ¸½Úµãºó£¬ÇÒrµÄÎ»ÖÃ²»±ä
+			space[r]->cur = i;//å½“è¡¨ä¸­ä¸å­˜åœ¨è¯¥å…ƒç´ ï¼Œæ’å…¥ræ‰€æŒ‡èŠ‚ç‚¹åï¼Œä¸”rçš„ä½ç½®ä¸å˜
 		}
-		else//¸ÆÔªËØÒÑÔÚ±íÖĞ É¾³ı
+		else//é’™å…ƒç´ å·²åœ¨è¡¨ä¸­ åˆ é™¤
 		{
 			space[p]->cur = space[k]->cur;
 			Free_SL(space, k);
 			if (r == k) 
-				r = p;//rÊ¼ÖÕÖ¸ÏòAµÄ×îºó
+				r = p;//rå§‹ç»ˆæŒ‡å‘Açš„æœ€å
 		}
 	}
 }

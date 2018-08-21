@@ -2,8 +2,8 @@
 #include<stdlib.h>
 #define MaxSize 50
 /*
-ÏßĞÔ±íµÄË³Ğò´æ´¢½á¹¹¼°ÆäÏà¹Ø²Ù×÷
-¾²Ì¬·ÖÅä
+çº¿æ€§è¡¨çš„é¡ºåºå­˜å‚¨ç»“æ„åŠå…¶ç›¸å…³æ“ä½œ
+é™æ€åˆ†é…
  */
 
 typedef int ElemType;
@@ -26,7 +26,7 @@ bool ListEmpty(SqList L){
 	return false;
 }
 bool ListInsert(SqList &L,int i,ElemType e){
-	//±¾Ëã·¨ÊµÏÖ½«ÔªËØe²åÈëµ½Ë³Ğò±íLÖĞµÄµÚiµÄÎ»ÖÃ
+	//æœ¬ç®—æ³•å®ç°å°†å…ƒç´ eæ’å…¥åˆ°é¡ºåºè¡¨Lä¸­çš„ç¬¬içš„ä½ç½®
 	if(i < 1||i > L.length)
 		reutrn false;
 	if(L.length >= MaxSize)
@@ -79,9 +79,9 @@ void PrintList(SqList L){
 }
 
 bool Del_Min(SqList &L,ElemType &value){
-	//É¾³ıË³Ğò±íÖĞ×îĞ¡ÖµÔªËØ½Úµã
-	//Ëã·¨Ë¼Ïë£ºËÑË÷Õû¸öË³Ğò±í£¬²éÕÒ×îĞ¡ÖµÔªËØ²¢¼ÇÂ¼Î»ÖÃ
-	//ËÑË÷½áÊøºóÓÃ×îºóÒ»¸öÔªËØÌî²¹¿Õ³öµÄÔ­À´×îĞ¡ÔªËØÎ»ÖÃ
+	//åˆ é™¤é¡ºåºè¡¨ä¸­æœ€å°å€¼å…ƒç´ èŠ‚ç‚¹
+	//ç®—æ³•æ€æƒ³ï¼šæœç´¢æ•´ä¸ªé¡ºåºè¡¨ï¼ŒæŸ¥æ‰¾æœ€å°å€¼å…ƒç´ å¹¶è®°å½•ä½ç½®
+	//æœç´¢ç»“æŸåç”¨æœ€åä¸€ä¸ªå…ƒç´ å¡«è¡¥ç©ºå‡ºçš„åŸæ¥æœ€å°å…ƒç´ ä½ç½®
 	if(L.length == 0)
 		return false;
 	value = L.data[0];
@@ -96,7 +96,7 @@ bool Del_Min(SqList &L,ElemType &value){
 		return true;
 }
 void Reverse(SqList &L){
-	//Ë³Ğò±íÔªËØÄæÖÃ  Ê±¼ä¸´ÔÓ¶ÈO(1)
+	//é¡ºåºè¡¨å…ƒç´ é€†ç½®  æ—¶é—´å¤æ‚åº¦O(1)
 	ElemType temp;
 	for(int i=0;i<L.length/2;i++){
 		temp = L.data[i];
@@ -105,8 +105,8 @@ void Reverse(SqList &L){
 	}
 }
 void Del_x_1(SqList &L,ElemType x){
-	//k¼ÇÂ¼Ë³Ğò±íÖĞ²»µÈÓÚxµÄÔªËØµÄ¸öÊı ±ßÉ¨Ãè±ßÍ³¼Æ
-   //²¢½«²»µÈÓÚxµÄÔªËØÏòÇ°·ÅÖÃkÎ»ÖÃÉÏ
+	//kè®°å½•é¡ºåºè¡¨ä¸­ä¸ç­‰äºxçš„å…ƒç´ çš„ä¸ªæ•° è¾¹æ‰«æè¾¹ç»Ÿè®¡
+   //å¹¶å°†ä¸ç­‰äºxçš„å…ƒç´ å‘å‰æ”¾ç½®kä½ç½®ä¸Š
 
 	int k=0;
     for(int i=0;i<L.length;i++)
@@ -118,7 +118,7 @@ void Del_x_1(SqList &L,ElemType x){
 }
         
 void Del_x_2(SqList &L,ELemType x){
-	//½«²»µÈÓÚxµÄÔªËØÇ°ÒÆkgeÎ»ÖÃ
+	//å°†ä¸ç­‰äºxçš„å…ƒç´ å‰ç§»kgeä½ç½®
    int k = 0,i = 0;
    while(i<L.length){
    		if(L.data[i] == x)
@@ -131,8 +131,8 @@ void Del_x_2(SqList &L,ELemType x){
 }
         
 bool Del_s_t2(SqList &L,ElemType s,ElemType t){
-	//Ëã·¨Ë¼Ïë£¬ÏÈÑ°ÕÒ´óÓÚµÈÓÚsµÄµÚÒ»¸öÔªËØ È»ºóÑ°ÕÒÖµ´óÓÚtµÄµÚÒ»¸öÔªËØ
-	//½«Õâ¶ÎÔªËØÉ¾³ı Ö»Ğè½«ºóÃæµÄÔªËØÇ°ÒÆ¶¯¼´¿É
+	//ç®—æ³•æ€æƒ³ï¼Œå…ˆå¯»æ‰¾å¤§äºç­‰äºsçš„ç¬¬ä¸€ä¸ªå…ƒç´  ç„¶åå¯»æ‰¾å€¼å¤§äºtçš„ç¬¬ä¸€ä¸ªå…ƒç´ 
+	//å°†è¿™æ®µå…ƒç´ åˆ é™¤ åªéœ€å°†åé¢çš„å…ƒç´ å‰ç§»åŠ¨å³å¯
 	int i,j;
    if(s>=t || L.length == 0)
     	return false;
@@ -146,8 +146,8 @@ bool Del_s_t2(SqList &L,ElemType s,ElemType t){
 	return true;
 }
 bool Del_s_t(SqList &L,ElemType s,ElemType t){
-	//´ÓÇ°ÏòºóÉ¨ÃèË³Ğò±í£¬k¼ÇÂ¼sºÍtÖ®¼äµÄÔªËØ¸öÊı
-   //¶ÔÓÚµ±Ç°É¨ÃèµÄÔªËØ¡£ÈôÆäÖµ²»ÔÙstÖ®¼ä ÔòÇ°ÒÆk¸öÎ»ÖÃ£»·ñÔòÖ´ĞĞk++
+	//ä»å‰å‘åæ‰«æé¡ºåºè¡¨ï¼Œkè®°å½•så’Œtä¹‹é—´çš„å…ƒç´ ä¸ªæ•°
+   //å¯¹äºå½“å‰æ‰«æçš„å…ƒç´ ã€‚è‹¥å…¶å€¼ä¸å†stä¹‹é—´ åˆ™å‰ç§»kä¸ªä½ç½®ï¼›å¦åˆ™æ‰§è¡Œk++
    int i,k=0;
    if(L.length == 0||s>=t)
        return false;
@@ -162,11 +162,11 @@ bool Del_s_t(SqList &L,ElemType s,ElemType t){
     
 }
 bool Delete_Same(SqList &L){
-    //³õÊ¼½«µÚÒ»¸öÔªËØ¿´×÷·ÇÖØ¸´µÄÓĞĞò±í£¬Ö®ºóÒÀ´ÎÅĞ¶ÏºóÃæµÄÔªËØÊÇ·ñÓëÇ°ÃæµÄÓĞĞò±íµÄ×îºóÒ»¸öÔªËØÏàÍ¬£¬
-	//Èç¹ûÏàÍ¬Ôò¼ÌĞøÏòºóÅĞ¶Ï or ²åÈëµ½Ç°ÃæÓĞĞò±íµÄ×îºó£¬Ö±µ½ÅĞ¶Ïµ½±íÎ²ÎªÖ¹
+    //åˆå§‹å°†ç¬¬ä¸€ä¸ªå…ƒç´ çœ‹ä½œéé‡å¤çš„æœ‰åºè¡¨ï¼Œä¹‹åä¾æ¬¡åˆ¤æ–­åé¢çš„å…ƒç´ æ˜¯å¦ä¸å‰é¢çš„æœ‰åºè¡¨çš„æœ€åä¸€ä¸ªå…ƒç´ ç›¸åŒï¼Œ
+	//å¦‚æœç›¸åŒåˆ™ç»§ç»­å‘ååˆ¤æ–­ or æ’å…¥åˆ°å‰é¢æœ‰åºè¡¨çš„æœ€åï¼Œç›´åˆ°åˆ¤æ–­åˆ°è¡¨å°¾ä¸ºæ­¢
     if(L.length==0)
         return false;
-    int i,j;//i´æ´¢µÚÒ»¸ö²»ÏàµÈµÄÔªËØ j¹¤×÷Ö¸Õë
+    int i,j;//iå­˜å‚¨ç¬¬ä¸€ä¸ªä¸ç›¸ç­‰çš„å…ƒç´  jå·¥ä½œæŒ‡é’ˆ
     for(i=0,j=1;j<L.length;j++)
     	if(L.data[i]!=L.data[j])
     		L.data[++i] = L.data[j];
@@ -174,7 +174,7 @@ bool Delete_Same(SqList &L){
     return true;
 }
 bool MergeABtoC(SqList A,SqList B,SqList &C){
-    //ºÏ²¢AB to C
+    //åˆå¹¶AB to C
 	if(A.length+B.length>C.MaxSize)
        return false;
     int i=0,j=0,k=0;
@@ -192,7 +192,7 @@ bool MergeABtoC(SqList A,SqList B,SqList &C){
     return true;
 }
 void Reverse(SqList &L,int left,int right,int arraySize){
-    //Äæ×ª
+    //é€†è½¬
 	if(left>=right||right>=arraySize)
    		return ;
    	int mid = (left + right)/2;
@@ -203,7 +203,7 @@ void Reverse(SqList &L,int left,int right,int arraySize){
     }    
 }
 void ExChange(SqList &L,int m,int n,int arraySize){
-   //Ô­µØÄæ×ª×ÜµÄ£¬È»ºó·Ö±ğÄæ×ª
+   //åŸåœ°é€†è½¬æ€»çš„ï¼Œç„¶ååˆ†åˆ«é€†è½¬
 	Reverse(L,0,m+n-1,arraySize);
   	Reverse(L,0,n-1,arraySize);
    	Reverse(L,n,m+n-1,arraySize);
@@ -217,9 +217,9 @@ void SearchExchangeInsert(SqList &L,Elemtype x){
     	else if(L.data[mid]<x) low = mid+1;
        else high=mid-1; 
    }
-   //ÏÂÃæÁ½¸öifÖ»»áÖ´ĞĞÒ»¸ö
+   //ä¸‹é¢ä¸¤ä¸ªifåªä¼šæ‰§è¡Œä¸€ä¸ª
 	if(L.data[mid] == x&&mid!=L.length-1){
-		//Èô×îºóÒ»¸öÔªËØÓëxÏàµÈ Ôò²»´æÔÚÓëÆäºó¼Ì½»»»µÄ²Ù×÷
+		//è‹¥æœ€åä¸€ä¸ªå…ƒç´ ä¸xç›¸ç­‰ åˆ™ä¸å­˜åœ¨ä¸å…¶åç»§äº¤æ¢çš„æ“ä½œ
     	Elemtype t = L.data[mid];
     	L.data[mid] = L.data[mid+1];
     	L.data[mid+1] = t;
