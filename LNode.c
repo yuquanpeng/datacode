@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-/*å•é“¾è¡¨
+/*µ¥Á´±í
 */
 typedef int ElemType;
 typedef struct LNode
@@ -19,7 +19,7 @@ void MergeList_L(LinkList La, LinkList *Lb, LinkList *Lc);
 int ListLength_L(LinkList L);
 int ListEmpty_L(LinkList L);
 void ClearList_L(LinkList L);
-//è‹¥cur_eæ˜¯Lçš„æ•°æ®å…ƒç´ ï¼Œä¸”ä¸æ˜¯ç¬¬ä¸€ä¸ªï¼Œåˆ™ç”¨pre_eè¿”å›ä»–çš„å‰é©±ï¼Œå¦åˆ™æ“ä½œå¤±è´¥
+//Èôcur_eÊÇLµÄÊı¾İÔªËØ£¬ÇÒ²»ÊÇµÚÒ»¸ö£¬ÔòÓÃpre_e·µ»ØËûµÄÇ°Çı£¬·ñÔò²Ù×÷Ê§°Ü
 int PriorElem_L(LinkList L, ElemType cur_e, ElemType *pre_e);
 int NextElem_L(LinkList L, ElemType cur_e, ElemType *next_e);
 int Compare_L(ElemType ve1, ElemType ve2);
@@ -31,27 +31,27 @@ void main()
 	int n = 5;
 	LinkList La, Lb, Lc;
 
-	CreateList_L(&La, n); //é€†ä½åºè¾“å…¥nä¸ªå…ƒç´ çš„å€¼
-	printf("æ–°åˆ›å»ºçš„Laï¼š"); //è¾“å‡ºé“¾è¡¨Laçš„å†…å®¹ 
+	CreateList_L(&La, n); //ÄæÎ»ĞòÊäÈën¸öÔªËØµÄÖµ
+	printf("ĞÂ´´½¨µÄLa£º"); //Êä³öÁ´±íLaµÄÄÚÈİ 
 	PrintList_L(La);
 	printf("\n");
 
-	CreateList_L(&Lb, n); /* é€†ä½åºè¾“å…¥nä¸ªå…ƒç´ çš„å€¼ */
-	printf("æ–°åˆ›å»ºçš„Lbï¼š"); /* è¾“å‡ºé“¾è¡¨Lbçš„å†…å®¹ */
+	CreateList_L(&Lb, n); /* ÄæÎ»ĞòÊäÈën¸öÔªËØµÄÖµ */
+	printf("ĞÂ´´½¨µÄLb£º"); /* Êä³öÁ´±íLbµÄÄÚÈİ */
 	PrintList_L(Lb);
 	printf("\n");
-	MergeList_L(La, &Lb, &Lc); /* æŒ‰éé€’å‡é¡ºåºå½’å¹¶Laå’ŒLb,å¾—åˆ°æ–°è¡¨Lc */
-	printf("MergeList_L åçš„Lcï¼š"); /* è¾“å‡ºé“¾è¡¨Lcçš„å†…å®¹ */
+	MergeList_L(La, &Lb, &Lc); /* °´·Çµİ¼õË³Ğò¹é²¢LaºÍLb,µÃµ½ĞÂ±íLc */
+	printf("MergeList_L ºóµÄLc£º"); /* Êä³öÁ´±íLcµÄÄÚÈİ */
 	PrintList_L(Lc);
 	printf("\n");
 }
 
-void InitList_L(LinkList *L)//æ„é€ ä¸€ä¸ªç©ºçš„çº¿æ€§è¡¨L
+void InitList_L(LinkList *L)//¹¹ÔìÒ»¸ö¿ÕµÄÏßĞÔ±íL
 {
 	*L = (LinkList)malloc(sizeof(LNode));
 	if (!*L)
 	{
-		printf("ç©ºçº¿æ€§è¡¨æ„é€ å¤±è´¥");
+		printf("¿ÕÏßĞÔ±í¹¹ÔìÊ§°Ü");
 		exit(1);
 	}
 	(*L)->next = NULL;
@@ -68,17 +68,17 @@ void DestroyList_L(LinkList *L)
 		*L = q;
 	}
 }
-void ClearList_L(LinkList L)//å°†Lé‡ç½®ä¸ºNULL
+void ClearList_L(LinkList L)//½«LÖØÖÃÎªNULL
 {
 	LinkList p, q;
 	p = L->next;
-	while (p) //æ²¡åˆ°è¡¨å°¾ 
+	while (p) //Ã»µ½±íÎ² 
 	{
 		q = p->next;
 		free(p);
 		p = q;
 	}
-	L->next = NULL; //å¤´ç»“ç‚¹æŒ‡é’ˆåŸŸä¸ºç©º 
+	L->next = NULL; //Í·½áµãÖ¸ÕëÓòÎª¿Õ 
 }
 int ListLength_L(LinkList L)
 {
@@ -100,25 +100,25 @@ int ListEmpty_L(LinkList L)
 }
 void CreateList_L(LinkList *L, int n)
 {
-	//é€†ä½åºè¾“å…¥nä¸ªå…ƒç´ çš„å€¼ å»ºç«‹å¸¦è¡¨å¤´ç»“ç‚¹çš„å•é“¾çº¿æ€§è¡¨L
+	//ÄæÎ»ĞòÊäÈën¸öÔªËØµÄÖµ ½¨Á¢´ø±íÍ·½áµãµÄµ¥Á´ÏßĞÔ±íL
 	LinkList p;
 	int i;
 	*L = (LinkList)malloc(sizeof(LNode));
-	(*L)->next = NULL;//å…ˆå»ºç«‹ä¸€ä¸ªå¸¦å¤´ç»“ç‚¹çš„å•é“¾è¡¨
+	(*L)->next = NULL;//ÏÈ½¨Á¢Ò»¸ö´øÍ·½áµãµÄµ¥Á´±í
 	for (i = n; i > 0; i--)
 	{
-		p = (LinkList)malloc(sizeof(LNode));//ç”Ÿæˆæ–°èŠ‚ç‚¹
-		scanf_s("%d", &p->data); //è¾“å…¥å…ƒç´ å€¼ 
-		p->next = (*L)->next; // æ’å…¥åˆ°è¡¨å¤´ 
+		p = (LinkList)malloc(sizeof(LNode));//Éú³ÉĞÂ½Úµã
+		scanf_s("%d", &p->data); //ÊäÈëÔªËØÖµ 
+		p->next = (*L)->next; // ²åÈëµ½±íÍ· 
 		(*L)->next = p;
 	}
 }
 
 int GetELem_L(LinkList L, int i, ElemType *e)
 {
-	//Lä¸ºå¸¦å¤´ç»“ç‚¹çš„å•é“¾è¡¨çš„å¤´æŒ‡é’ˆ
-	//iå…ƒç´ å­˜åœ¨è¿”å›1 å¹¶å°†ä¹‹ä»˜ç»™e
-	LinkList p = L->next;//åˆå§‹åŒ–  pæŒ‡å‘ç¬¬ä¸€ä¸ªèŠ‚ç‚¹ j ä¸ºè®¡æ•°å™¨
+	//LÎª´øÍ·½áµãµÄµ¥Á´±íµÄÍ·Ö¸Õë
+	//iÔªËØ´æÔÚ·µ»Ø1 ²¢½«Ö®¸¶¸øe
+	LinkList p = L->next;//³õÊ¼»¯  pÖ¸ÏòµÚÒ»¸ö½Úµã j Îª¼ÆÊıÆ÷
 	int j = 1;
 	while (p&&j < i)
 	{
@@ -127,14 +127,14 @@ int GetELem_L(LinkList L, int i, ElemType *e)
 	}
 	if (!p || j>i)
 	{
-		printf("è·å–å€¼iéæ³• ç¨‹åºé€€å‡º");
+		printf("»ñÈ¡Öµi·Ç·¨ ³ÌĞòÍË³ö");
 		exit(1);
 	}
-	*e = p->data;//å–ç¬¬iä¸ªå…ƒç´ 
+	*e = p->data;//È¡µÚi¸öÔªËØ
 	return 1;
 }
 
-int Compare_L(ElemType ve1, ElemType ve2)//æ•°æ®å…ƒç´ åˆ¤å®šå‡½æ•°
+int Compare_L(ElemType ve1, ElemType ve2)//Êı¾İÔªËØÅĞ¶¨º¯Êı
 {
 	if (ve1 == ve2)
 	{
@@ -149,7 +149,7 @@ int LocateElem_L(LinkList L, ElemType e)
 	while (p)
 	{
 		i++;
-		if (Compare_L(p->data, e)) //æ‰¾åˆ°æ•°æ®å…ƒç´ 
+		if (Compare_L(p->data, e)) //ÕÒµ½Êı¾İÔªËØ
 			return i;
 		p = p->next;
 	}
@@ -158,30 +158,30 @@ int LocateElem_L(LinkList L, ElemType e)
 
 int PriorElem_L(LinkList L, ElemType cur_e, ElemType *pre_e)
 {
-	LinkList q, p = L->next; // pæŒ‡å‘ç¬¬ä¸€ä¸ªç»“ç‚¹
-	while (p->next) //pæ‰€æŒ‡ç»“ç‚¹æœ‰åç»§ 
+	LinkList q, p = L->next; // pÖ¸ÏòµÚÒ»¸ö½áµã
+	while (p->next) //pËùÖ¸½áµãÓĞºó¼Ì 
 	{
-		q = p->next; // qä¸ºpçš„åç»§ 
+		q = p->next; // qÎªpµÄºó¼Ì 
 		if (q->data == cur_e)
 		{
 			*pre_e = p->data;
 			return 1;
 		}
-		p = q; // på‘åç§» 
+		p = q; // pÏòºóÒÆ 
 	}
 	return 0;
 }
 int NextElem_L(LinkList L, ElemType cur_e, ElemType *next_e)
 {
-	LinkList p = L->next; // pæŒ‡å‘ç¬¬ä¸€ä¸ªç»“ç‚¹
-	while (p->next) //pæ‰€æŒ‡ç»“ç‚¹æœ‰å‰é©± 
+	LinkList p = L->next; // pÖ¸ÏòµÚÒ»¸ö½áµã
+	while (p->next) //pËùÖ¸½áµãÓĞÇ°Çı 
 	{
 		if (p->data == cur_e)
 		{
 			*next_e = p->data;
 			return 1;
 		}
-		p = p->next; // på‘åç§» 
+		p = p->next; // pÏòºóÒÆ 
 	}
 	return 0;
 }
@@ -189,38 +189,38 @@ void ListInsert_L(LinkList L, int i, ElemType e)
 {
 	LinkList p = L;
 	int j = 0;
-	while (p && j < i - 1)//å¯»æ‰¾ç¬¬i-1ä¸ªèŠ‚ç‚¹
+	while (p && j < i - 1)//Ñ°ÕÒµÚi-1¸ö½Úµã
 	{
 		p = p->next;
 		++j;
 	}
 	if (!p || j>i - 1)
 	{
-		printf("æ’å…¥å€¼iéæ³• ç¨‹åºé€€å‡º");
+		printf("²åÈëÖµi·Ç·¨ ³ÌĞòÍË³ö");
 		exit(1);
 	}
-	LinkList s = (LinkList)malloc(sizeof(LNode));//ç”Ÿæˆæ–°èŠ‚ç‚¹
-	s->data = e;//æ’å…¥L
+	LinkList s = (LinkList)malloc(sizeof(LNode));//Éú³ÉĞÂ½Úµã
+	s->data = e;//²åÈëL
 	s->next = p->next;
 	p->next = s;
 }
 void ListDelete_L(LinkList L, int i, ElemType e)
 {
-	//åˆ é™¤ç¬¬iä¸ªå…ƒç´  å¹¶æœ‰eè¿”å›æ——å¸œ
+	//É¾³ıµÚi¸öÔªËØ ²¢ÓĞe·µ»ØÆìÖÄ
 	LinkList p = L;
 	int j = 0;
-	while (p->next && j < i - 1)//å¯»æ‰¾ç¬¬i-1ä¸ªèŠ‚ç‚¹
+	while (p->next && j < i - 1)//Ñ°ÕÒµÚi-1¸ö½Úµã
 	{
 		p = p->next;
 		++j;
 	}
 	if (!p->next || j>i - 1)
 	{
-		printf("åˆ é™¤å€¼iéæ³• ç¨‹åºé€€å‡º");
+		printf("É¾³ıÖµi·Ç·¨ ³ÌĞòÍË³ö");
 		exit(1);
 	}
-	LinkList q = (LinkList)malloc(sizeof(LNode));//ç”Ÿæˆæ–°èŠ‚ç‚¹
-	q = p->next;//åˆ é™¤å¹¶é‡Šæ”¾ç»“ç‚¹
+	LinkList q = (LinkList)malloc(sizeof(LNode));//Éú³ÉĞÂ½Úµã
+	q = p->next;//É¾³ı²¢ÊÍ·Å½áµã
 	p->next = q->next;
 	e = q->data;
 	free(q);
@@ -238,11 +238,11 @@ void PrintList_L(LinkList L)
 
 void MergeList_L(LinkList La, LinkList *Lb, LinkList *Lc)
 {
-	//å·²çŸ¥å•é“¾çº¿æ€§è¡¨Laå’ŒLbçš„å…ƒç´ æŒ‰å€¼éé€’å‡æ’åˆ—
-	//å½’å¹¶Laå’ŒLbå¾—åˆ°æ–°çš„å•é“¾çº¿æ€§è¡¨Lcï¼ŒLcçš„å…ƒç´ ä¹ŸæŒ‰å€¼éé€’å‡æ’åˆ—
+	//ÒÑÖªµ¥Á´ÏßĞÔ±íLaºÍLbµÄÔªËØ°´Öµ·Çµİ¼õÅÅÁĞ
+	//¹é²¢LaºÍLbµÃµ½ĞÂµÄµ¥Á´ÏßĞÔ±íLc£¬LcµÄÔªËØÒ²°´Öµ·Çµİ¼õÅÅÁĞ
 
 	LinkList pa = (*La).next, pb = (*Lb)->next, pc;
-	*Lc = pc = La; //ç”¨Laçš„å¤´ç»“ç‚¹ä½œä¸ºLcçš„å¤´ç»“ç‚¹ 
+	*Lc = pc = La; //ÓÃLaµÄÍ·½áµã×÷ÎªLcµÄÍ·½áµã 
 
 	while (pa&&pb)
 		if (pa->data <= pb->data)
@@ -258,7 +258,7 @@ void MergeList_L(LinkList La, LinkList *Lb, LinkList *Lc)
 			pb = pb->next;
 		}
 
-	pc->next = pa ? pa : pb; //æ’å…¥å‰©ä½™æ®µ 
-	free(*Lb); // é‡Šæ”¾Lbçš„å¤´ç»“ç‚¹ 
+	pc->next = pa ? pa : pb; //²åÈëÊ£Óà¶Î 
+	free(*Lb); // ÊÍ·ÅLbµÄÍ·½áµã 
 	Lb = NULL;
 }

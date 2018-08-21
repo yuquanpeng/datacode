@@ -4,7 +4,7 @@
 #define OK 0
 #define FALSE 0
 #define ERROR 0
-/*å¸¦æœ‰å¤´ç»“ç‚¹å’Œå°¾ç»“ç‚¹çš„å•é“¾è¡¨*/
+/*´øÓĞÍ·½áµãºÍÎ²½áµãµÄµ¥Á´±í*/
 typedef int Status;
 typedef int ElemType;
 
@@ -19,36 +19,36 @@ typedef struct {
 	int len;
 }LinkList;
 
-Status MakeNode(Link &p, ElemType e);   //åˆ†é…ç”±pæŒ‡å‘eçš„ç»“ç‚¹ï¼Œå¹¶è¿”å›Okï¼›è‹¥åˆ†é…å¤±è´¥ï¼Œåˆ™è¿”å›ERROR
-void FreeNode(Link &p);                 //é‡Šæ”¾pæ‰€æŒ‡ç»“ç‚¹
-Status InitList(LinkList &L);           //æ„é€ ä¸€ä¸ªç©ºçš„çº¿æ€§é“¾è¡¨L
-Status DestroyList(LinkList &L);        //é”€æ¯é“¾è¡¨Lï¼ŒLä¸å†å­˜åœ¨
-Status ClearList(LinkList &L);          //å°†çº¿æ€§é“¾è¡¨Lé‡ç½®ä¸ºç©ºè¡¨ï¼Œå¹¶é‡Šæ”¾åŸé“¾è¡¨çš„ç»“ç‚¹ç©ºé—´
-Status InsFirst(Link h, Link s);         //å·²çŸ¥hæŒ‡å‘çº¿æ€§é“¾è¡¨çš„å¤´ç»“ç‚¹ï¼Œå°†sæ‰€æŒ‡ç»“ç‚¹æ’å…¥åœ¨ç¬¬ä¸€ä¸ªç»“ç‚¹ä¹‹å‰
-Status DelFirst(Link h, Link &q);       //å·²çŸ¥hæŒ‡å‘çº¿æ€§é“¾è¡¨çš„å¤´ç»“ç‚¹ï¼Œåˆ é™¤é“¾è¡¨ä¸­çš„ç¬¬ä¸€ä¸ªç»“ç‚¹å¹¶ä»¥qè¿”å›
-Status Append(LinkList &L, Link s);      //å°†æŒ‡é’ˆsæ‰€æŒ‡çš„ä¸€ä¸²ç»“ç‚¹è¿æ¥åœ¨çº¿æ€§é“¾è¡¨Lçš„æœ€åä¸€ä¸ªç»“ç‚¹ä¹‹åï¼Œ
-										 //å¹¶æ”¹å˜é“¾è¡¨Lçš„å°¾æŒ‡é’ˆæŒ‡å‘æ–°çš„å°¾ç»“ç‚¹
-Status Remove(LinkList &L, Link &q);    //åˆ é™¤çº¿æ€§é“¾è¡¨Lä¸­çš„å°¾ç»“ç‚¹å¹¶ä»¥qè¿”å›ï¼Œæ”¹å˜é“¾è¡¨Lçš„å°¾æŒ‡é’ˆæŒ‡å‘æ–°çš„å°¾ç»“ç‚¹
+Status MakeNode(Link &p, ElemType e);   //·ÖÅäÓÉpÖ¸ÏòeµÄ½áµã£¬²¢·µ»ØOk£»Èô·ÖÅäÊ§°Ü£¬Ôò·µ»ØERROR
+void FreeNode(Link &p);                 //ÊÍ·ÅpËùÖ¸½áµã
+Status InitList(LinkList &L);           //¹¹ÔìÒ»¸ö¿ÕµÄÏßĞÔÁ´±íL
+Status DestroyList(LinkList &L);        //Ïú»ÙÁ´±íL£¬L²»ÔÙ´æÔÚ
+Status ClearList(LinkList &L);          //½«ÏßĞÔÁ´±íLÖØÖÃÎª¿Õ±í£¬²¢ÊÍ·ÅÔ­Á´±íµÄ½áµã¿Õ¼ä
+Status InsFirst(Link h, Link s);         //ÒÑÖªhÖ¸ÏòÏßĞÔÁ´±íµÄÍ·½áµã£¬½«sËùÖ¸½áµã²åÈëÔÚµÚÒ»¸ö½áµãÖ®Ç°
+Status DelFirst(Link h, Link &q);       //ÒÑÖªhÖ¸ÏòÏßĞÔÁ´±íµÄÍ·½áµã£¬É¾³ıÁ´±íÖĞµÄµÚÒ»¸ö½áµã²¢ÒÔq·µ»Ø
+Status Append(LinkList &L, Link s);      //½«Ö¸ÕësËùÖ¸µÄÒ»´®½áµãÁ¬½ÓÔÚÏßĞÔÁ´±íLµÄ×îºóÒ»¸ö½áµãÖ®ºó£¬
+										 //²¢¸Ä±äÁ´±íLµÄÎ²Ö¸ÕëÖ¸ÏòĞÂµÄÎ²½áµã
+Status Remove(LinkList &L, Link &q);    //É¾³ıÏßĞÔÁ´±íLÖĞµÄÎ²½áµã²¢ÒÔq·µ»Ø£¬¸Ä±äÁ´±íLµÄÎ²Ö¸ÕëÖ¸ÏòĞÂµÄÎ²½áµã
 Status InsBefore(LinkList &L, Link &p, Link s);
-//å·²çŸ¥pæŒ‡å‘çº¿æ€§é“¾è¡¨Lä¸­çš„ä¸€ä¸ªç»“ç‚¹ï¼Œå°†sæ‰€æŒ‡ç»“ç‚¹æ’å…¥åœ¨pæ‰€æŒ‡ç»“ç‚¹ä¹‹å‰ï¼Œå¹¶ä¿®æ”¹æŒ‡é’ˆpæŒ‡å‘æ–°æ’å…¥çš„ç»“ç‚¹
+//ÒÑÖªpÖ¸ÏòÏßĞÔÁ´±íLÖĞµÄÒ»¸ö½áµã£¬½«sËùÖ¸½áµã²åÈëÔÚpËùÖ¸½áµãÖ®Ç°£¬²¢ĞŞ¸ÄÖ¸ÕëpÖ¸ÏòĞÂ²åÈëµÄ½áµã
 Status InsAfter(LinkList &L, Link &p, Link s);
-//å·²çŸ¥pæŒ‡å‘çº¿æ€§é“¾è¡¨Lä¸­çš„ä¸€ä¸ªç»“ç‚¹ï¼Œå°†sæ‰€æŒ‡ç»“ç‚¹æ’å…¥åœ¨pæ‰€æŒ‡ç»“ç‚¹ä¹‹åï¼Œå¹¶ä¿®æ”¹æŒ‡é’ˆpæŒ‡å‘æ–°æ’å…¥çš„ç»“ç‚¹
-Status SetCurElem(Link &p, ElemType e);  //å·²çŸ¥pæŒ‡å‘çº¿æ€§é“¾è¡¨ä¸­çš„ä¸€ä¸ªç»“ç‚¹ï¼Œç”¨eæ›´æ–°pæ‰€æŒ‡ç»“ç‚¹ä¸­æ•°æ®å…ƒç´ çš„å€¼
-ElemType GetCurElem(Link p);            //å·²çŸ¥pæŒ‡å‘çº¿æ€§é“¾è¡¨ä¸­çš„ä¸€ä¸ªç»“ç‚¹ï¼Œè¿”å›pæ‰€æŒ‡ç»“ç‚¹ä¸­æ•°æ®å…ƒç´ çš„å€¼
-Status  ListEmpty(LinkList L);          //è‹¥çº¿æ€§è¡¨Lä¸ºç©ºè¡¨ï¼Œåˆ™è¿”å›TRUEï¼Œå¦åˆ™è¿”å›FALSE
-int ListLength(LinkList L);             //è¿”å›çº¿æ€§é“¾è¡¨Lä¸­çš„å…ƒç´ ä¸ªæ•°
-Position GetHead(LinkList L);           //è¿”å›çº¿æ€§é“¾è¡¨Lä¸­å¤´ç»“ç‚¹çš„ä½ç½®
-Position GetLast(LinkList L);           //è¿”å›çº¿æ€§é“¾è¡¨Lä¸­æœ€åä¸€ä¸ªèŠ‚ç‚¹çš„ä½ç½®
-Position PriorPos(LinkList L, Link p);   //å·²çŸ¥pæŒ‡å‘çº¿æ€§é“¾è¡¨Lä¸­çš„ä¸€ä¸ªç»“ç‚¹ï¼Œè¿”å›pæ‰€æŒ‡ç»“ç‚¹çš„ç›´æ¥å‰é©±ä½ç½®ï¼Œæ— è¿”å›NULL
-Position NextPos(LinkList L, Link p);    //å·²çŸ¥pæŒ‡å‘çº¿æ€§é“¾è¡¨Lä¸­çš„ä¸€ä¸ªç»“ç‚¹ï¼Œè¿”å›pæ‰€æŒ‡ç»“ç‚¹çš„ç›´æ¥åç»§ä½ç½®ï¼Œæ— è¿”å›NULL
-Status LocatePos(LinkList L, int i, Link &p);//è¿”å›pæŒ‡ç¤ºçº¿æ€§é“¾è¡¨Lç¬¬iä¸ªç»“ç‚¹å¹¶è¿”å›OKï¼Œiå€¼ä¸åˆæ³•æ—¶è¿”å›ERROR
+//ÒÑÖªpÖ¸ÏòÏßĞÔÁ´±íLÖĞµÄÒ»¸ö½áµã£¬½«sËùÖ¸½áµã²åÈëÔÚpËùÖ¸½áµãÖ®ºó£¬²¢ĞŞ¸ÄÖ¸ÕëpÖ¸ÏòĞÂ²åÈëµÄ½áµã
+Status SetCurElem(Link &p, ElemType e);  //ÒÑÖªpÖ¸ÏòÏßĞÔÁ´±íÖĞµÄÒ»¸ö½áµã£¬ÓÃe¸üĞÂpËùÖ¸½áµãÖĞÊı¾İÔªËØµÄÖµ
+ElemType GetCurElem(Link p);            //ÒÑÖªpÖ¸ÏòÏßĞÔÁ´±íÖĞµÄÒ»¸ö½áµã£¬·µ»ØpËùÖ¸½áµãÖĞÊı¾İÔªËØµÄÖµ
+Status  ListEmpty(LinkList L);          //ÈôÏßĞÔ±íLÎª¿Õ±í£¬Ôò·µ»ØTRUE£¬·ñÔò·µ»ØFALSE
+int ListLength(LinkList L);             //·µ»ØÏßĞÔÁ´±íLÖĞµÄÔªËØ¸öÊı
+Position GetHead(LinkList L);           //·µ»ØÏßĞÔÁ´±íLÖĞÍ·½áµãµÄÎ»ÖÃ
+Position GetLast(LinkList L);           //·µ»ØÏßĞÔÁ´±íLÖĞ×îºóÒ»¸ö½ÚµãµÄÎ»ÖÃ
+Position PriorPos(LinkList L, Link p);   //ÒÑÖªpÖ¸ÏòÏßĞÔÁ´±íLÖĞµÄÒ»¸ö½áµã£¬·µ»ØpËùÖ¸½áµãµÄÖ±½ÓÇ°ÇıÎ»ÖÃ£¬ÎŞ·µ»ØNULL
+Position NextPos(LinkList L, Link p);    //ÒÑÖªpÖ¸ÏòÏßĞÔÁ´±íLÖĞµÄÒ»¸ö½áµã£¬·µ»ØpËùÖ¸½áµãµÄÖ±½Óºó¼ÌÎ»ÖÃ£¬ÎŞ·µ»ØNULL
+Status LocatePos(LinkList L, int i, Link &p);//·µ»ØpÖ¸Ê¾ÏßĞÔÁ´±íLµÚi¸ö½áµã²¢·µ»ØOK£¬iÖµ²»ºÏ·¨Ê±·µ»ØERROR
 Position LocateElem(LinkList L, ElemType e, Status(*compare)(ElemType, ElemType));
-//è¿”å›çº¿æ€§é“¾è¡¨Lä¸­ç¬¬ä¸€ä¸ªä¸eæ»¡è¶³å‡½æ•°compareï¼ˆï¼‰åˆ¤å®šå…³ç³»çš„å…ƒç´ çš„ä½ç½®ï¼Œè‹¥ä¸å­˜åœ¨è¿™æ ·çš„å…ƒç´ åˆ™è¿”å›NULL
-Status ListTraverse(LinkList L, Status(*visit)());//ä¾æ¬¡å¯¹Lçš„æ¯ä¸ªå…ƒç´ è°ƒç”¨å‡½æ•°visitï¼ˆï¼‰ã€‚ä¸€ä½†visitï¼ˆï¼‰å¤±è´¥ï¼Œåˆ™æ“ä½œå¤±è´¥
-void Directory();                       //ç›®å½•æ˜¾ç¤º
-Status FunctionCall(LinkList & L, int i);  //å‡½æ•°è°ƒç”¨
-Status Input_L(LinkList &L, int i);        //æ¥å—å…ƒç´ 
-Status Output_L(LinkList L);              //è¾“å‡ºå…ƒç´ 
+//·µ»ØÏßĞÔÁ´±íLÖĞµÚÒ»¸öÓëeÂú×ãº¯Êıcompare£¨£©ÅĞ¶¨¹ØÏµµÄÔªËØµÄÎ»ÖÃ£¬Èô²»´æÔÚÕâÑùµÄÔªËØÔò·µ»ØNULL
+Status ListTraverse(LinkList L, Status(*visit)());//ÒÀ´Î¶ÔLµÄÃ¿¸öÔªËØµ÷ÓÃº¯Êıvisit£¨£©¡£Ò»µ«visit£¨£©Ê§°Ü£¬Ôò²Ù×÷Ê§°Ü
+void Directory();                       //Ä¿Â¼ÏÔÊ¾
+Status FunctionCall(LinkList & L, int i);  //º¯Êıµ÷ÓÃ
+Status Input_L(LinkList &L, int i);        //½ÓÊÜÔªËØ
+Status Output_L(LinkList L);              //Êä³öÔªËØ
 
 Status ListInsert_L(LinkList &L, int i, ElemType e);
 
@@ -57,17 +57,17 @@ int main()
 	LinkList L;
 	InitList(L);
 
-	cout <<"è¡¨ç©ºå¦ï¼š"<< ListEmpty(L);
+	cout <<"±í¿Õ·ñ£º"<< ListEmpty(L);
 
 	Input_L(L, 5);
 	Output_L(L);
-	cout << "è¡¨ç©ºå¦"<< ListEmpty(L);
+	cout << "±í¿Õ·ñ"<< ListEmpty(L);
 
 	return 0;
 }
 
-//åˆ†é…ç”±pæŒ‡å‘eçš„ç»“ç‚¹ï¼Œå¹¶è¿”å›Okï¼›è‹¥åˆ†é…å¤±è´¥ï¼Œåˆ™è¿”å›ERROR
-Status MakeNode(Link &p, ElemType e) {//åˆ†é…ç”±pæŒ‡å‘eçš„ç»“ç‚¹ï¼Œå¹¶è¿”å›Okï¼›è‹¥åˆ†é…å¤±è´¥ï¼Œåˆ™è¿”å›ERROR
+//·ÖÅäÓÉpÖ¸ÏòeµÄ½áµã£¬²¢·µ»ØOk£»Èô·ÖÅäÊ§°Ü£¬Ôò·µ»ØERROR
+Status MakeNode(Link &p, ElemType e) {//·ÖÅäÓÉpÖ¸ÏòeµÄ½áµã£¬²¢·µ»ØOk£»Èô·ÖÅäÊ§°Ü£¬Ôò·µ»ØERROR
 	p = (LNode*)new(LNode);
 	if (!p)
 		return ERROR;
@@ -76,13 +76,13 @@ Status MakeNode(Link &p, ElemType e) {//åˆ†é…ç”±pæŒ‡å‘eçš„ç»“ç‚¹ï¼Œå¹¶è¿”å›Ok
 	return OK;
 }
 
-//é‡Šæ”¾pæ‰€æŒ‡ç»“ç‚¹
-void FreeNode(Link &p) {//é‡Šæ”¾pæ‰€æŒ‡ç»“ç‚¹
+//ÊÍ·ÅpËùÖ¸½áµã
+void FreeNode(Link &p) {//ÊÍ·ÅpËùÖ¸½áµã
 	delete(p);
 }
 
 
-Status InitList(LinkList &L) {//æ„é€ ä¸€ä¸ªç©ºçš„çº¿æ€§é“¾è¡¨L
+Status InitList(LinkList &L) {//¹¹ÔìÒ»¸ö¿ÕµÄÏßĞÔÁ´±íL
 	Link p = (Link)new(LNode);
 	if (!p) return ERROR;
 	p->next = NULL;
@@ -90,7 +90,7 @@ Status InitList(LinkList &L) {//æ„é€ ä¸€ä¸ªç©ºçš„çº¿æ€§é“¾è¡¨L
 	L.len = 0;
 	return OK;
 }
-Status DestroyList(LinkList &L) {//é”€æ¯é“¾è¡¨Lï¼ŒLä¸å†å­˜åœ¨
+Status DestroyList(LinkList &L) {//Ïú»ÙÁ´±íL£¬L²»ÔÙ´æÔÚ
 	Link p;
 	p = L.head;
 	while (p) {
@@ -101,23 +101,23 @@ Status DestroyList(LinkList &L) {//é”€æ¯é“¾è¡¨Lï¼ŒLä¸å†å­˜åœ¨
 	L.len = 0;
 	return OK;
 }
-Status ClearList(LinkList &L) {//å°†çº¿æ€§é“¾è¡¨Lé‡ç½®ä¸ºç©ºè¡¨ï¼Œå¹¶é‡Šæ”¾åŸé“¾è¡¨çš„ç»“ç‚¹ç©ºé—´
+Status ClearList(LinkList &L) {//½«ÏßĞÔÁ´±íLÖØÖÃÎª¿Õ±í£¬²¢ÊÍ·ÅÔ­Á´±íµÄ½áµã¿Õ¼ä
 	DestroyList(L);
 	InitList(L);
 	return OK;
 }
-Status InsFirst(Link h, Link s) {//å·²çŸ¥hæŒ‡å‘çº¿æ€§é“¾è¡¨çš„å¤´ç»“ç‚¹ï¼Œå°†sæ‰€æŒ‡ç»“ç‚¹æ’å…¥åœ¨ç¬¬ä¸€ä¸ªç»“ç‚¹ä¹‹å‰
+Status InsFirst(Link h, Link s) {//ÒÑÖªhÖ¸ÏòÏßĞÔÁ´±íµÄÍ·½áµã£¬½«sËùÖ¸½áµã²åÈëÔÚµÚÒ»¸ö½áµãÖ®Ç°
 	s->next = h->next;
 	h->next = s;
 	return OK;
-}                       //ä¸ºä»€ä¹ˆè¿™ä¸€ä¸ªå’Œä¸‹ä¸€ä¸ªå‚æ•°æ²¡æœ‰linklistæ”¹å˜ä»–çš„é•¿åº¦ï¼ï¼ï¼ï¼ï¼ï¼
-Status DelFirst(Link h, Link &q) {//å·²çŸ¥hæŒ‡å‘çº¿æ€§é“¾è¡¨çš„å¤´ç»“ç‚¹ï¼Œåˆ é™¤é“¾è¡¨ä¸­çš„ç¬¬ä¸€ä¸ªç»“ç‚¹å¹¶ä»¥qè¿”å›
+}                       //ÎªÊ²Ã´ÕâÒ»¸öºÍÏÂÒ»¸ö²ÎÊıÃ»ÓĞlinklist¸Ä±äËûµÄ³¤¶È£¡£¡£¡£¡£¡£¡
+Status DelFirst(Link h, Link &q) {//ÒÑÖªhÖ¸ÏòÏßĞÔÁ´±íµÄÍ·½áµã£¬É¾³ıÁ´±íÖĞµÄµÚÒ»¸ö½áµã²¢ÒÔq·µ»Ø
 	q = h->next;
 	h->next = q->next;
 	return OK;
 }
-Status Append(LinkList &L, Link s) {//å°†æŒ‡é’ˆsæ‰€æŒ‡çš„ä¸€ä¸²ç»“ç‚¹è¿æ¥åœ¨çº¿æ€§é“¾è¡¨Lçš„æœ€åä¸€ä¸ªç»“ç‚¹ä¹‹åï¼Œå¹¶æ”¹å˜é“¾è¡¨Lçš„å°¾æŒ‡é’ˆæŒ‡å‘æ–°çš„å°¾ç»“ç‚¹
-	Link p = L.tail;               //é»˜è®¤è¿™ä¸²ç»“ç‚¹å·¦åä¸€ä¸ªæŒ‡å‘null
+Status Append(LinkList &L, Link s) {//½«Ö¸ÕësËùÖ¸µÄÒ»´®½áµãÁ¬½ÓÔÚÏßĞÔÁ´±íLµÄ×îºóÒ»¸ö½áµãÖ®ºó£¬²¢¸Ä±äÁ´±íLµÄÎ²Ö¸ÕëÖ¸ÏòĞÂµÄÎ²½áµã
+	Link p = L.tail;               //Ä¬ÈÏÕâ´®½áµã×óºóÒ»¸öÖ¸Ïònull
 	p = PriorPos(L, p);
 	p->next = s;
 	int i = 0;
@@ -129,7 +129,7 @@ Status Append(LinkList &L, Link s) {//å°†æŒ‡é’ˆsæ‰€æŒ‡çš„ä¸€ä¸²ç»“ç‚¹è¿æ¥åœ¨çº
 	L.len += i;
 	return OK;
 }
-Status Remove(LinkList &L, Link &q) {//åˆ é™¤çº¿æ€§é“¾è¡¨Lä¸­çš„å°¾ç»“ç‚¹å¹¶ä»¥qè¿”å›ï¼Œæ”¹å˜é“¾è¡¨Lçš„å°¾æŒ‡é’ˆæŒ‡å‘æ–°çš„å°¾ç»“ç‚¹
+Status Remove(LinkList &L, Link &q) {//É¾³ıÏßĞÔÁ´±íLÖĞµÄÎ²½áµã²¢ÒÔq·µ»Ø£¬¸Ä±äÁ´±íLµÄÎ²Ö¸ÕëÖ¸ÏòĞÂµÄÎ²½áµã
 	Link p = PriorPos(L, L.tail);
 	q = L.tail;
 	L.tail = p;
@@ -137,7 +137,7 @@ Status Remove(LinkList &L, Link &q) {//åˆ é™¤çº¿æ€§é“¾è¡¨Lä¸­çš„å°¾ç»“ç‚¹å¹¶ä»¥q
 	return OK;
 }
 Status InsBefore(LinkList &L, Link &p, Link s) {
-	//å·²çŸ¥pæŒ‡å‘çº¿æ€§é“¾è¡¨Lä¸­çš„ä¸€ä¸ªç»“ç‚¹ï¼Œå°†sæ‰€æŒ‡ç»“ç‚¹æ’å…¥åœ¨pæ‰€æŒ‡ç»“ç‚¹ä¹‹å‰ï¼Œå¹¶ä¿®æ”¹æŒ‡é’ˆpæŒ‡å‘æ–°æ’å…¥çš„ç»“ç‚¹
+	//ÒÑÖªpÖ¸ÏòÏßĞÔÁ´±íLÖĞµÄÒ»¸ö½áµã£¬½«sËùÖ¸½áµã²åÈëÔÚpËùÖ¸½áµãÖ®Ç°£¬²¢ĞŞ¸ÄÖ¸ÕëpÖ¸ÏòĞÂ²åÈëµÄ½áµã
 	s->next = p->next;
 	p->next = s;
 	p = s;
@@ -145,44 +145,44 @@ Status InsBefore(LinkList &L, Link &p, Link s) {
 	return OK;
 }
 Status InsAfter(LinkList &L, Link &p, Link s) {
-	//å·²çŸ¥pæŒ‡å‘çº¿æ€§é“¾è¡¨Lä¸­çš„ä¸€ä¸ªç»“ç‚¹ï¼Œå°†sæ‰€æŒ‡ç»“ç‚¹æ’å…¥åœ¨pæ‰€æŒ‡ç»“ç‚¹ä¹‹åï¼Œå¹¶ä¿®æ”¹æŒ‡é’ˆpæŒ‡å‘æ–°æ’å…¥çš„ç»“ç‚¹
+	//ÒÑÖªpÖ¸ÏòÏßĞÔÁ´±íLÖĞµÄÒ»¸ö½áµã£¬½«sËùÖ¸½áµã²åÈëÔÚpËùÖ¸½áµãÖ®ºó£¬²¢ĞŞ¸ÄÖ¸ÕëpÖ¸ÏòĞÂ²åÈëµÄ½áµã
 	p = p->next;
 	InsBefore(L, p, s);
 	return OK;
 }
-Status SetCurElem(Link &p, ElemType e) {//å·²çŸ¥pæŒ‡å‘çº¿æ€§é“¾è¡¨ä¸­çš„ä¸€ä¸ªç»“ç‚¹ï¼Œç”¨eæ›´æ–°pæ‰€æŒ‡ç»“ç‚¹ä¸­æ•°æ®å…ƒç´ çš„å€¼
+Status SetCurElem(Link &p, ElemType e) {//ÒÑÖªpÖ¸ÏòÏßĞÔÁ´±íÖĞµÄÒ»¸ö½áµã£¬ÓÃe¸üĞÂpËùÖ¸½áµãÖĞÊı¾İÔªËØµÄÖµ
 	p->data = e;
 	return OK;
 }
-ElemType GetCurElem(Link p) {//å·²çŸ¥pæŒ‡å‘çº¿æ€§é“¾è¡¨ä¸­çš„ä¸€ä¸ªç»“ç‚¹ï¼Œè¿”å›pæ‰€æŒ‡ç»“ç‚¹ä¸­æ•°æ®å…ƒç´ çš„å€¼
+ElemType GetCurElem(Link p) {//ÒÑÖªpÖ¸ÏòÏßĞÔÁ´±íÖĞµÄÒ»¸ö½áµã£¬·µ»ØpËùÖ¸½áµãÖĞÊı¾İÔªËØµÄÖµ
 	return p->data;
 }
-Status  ListEmpty(LinkList L) {//è‹¥çº¿æ€§è¡¨Lä¸ºç©ºè¡¨ï¼Œåˆ™è¿”å›TRUEï¼Œå¦åˆ™è¿”å›FALSE
+Status  ListEmpty(LinkList L) {//ÈôÏßĞÔ±íLÎª¿Õ±í£¬Ôò·µ»ØTRUE£¬·ñÔò·µ»ØFALSE
 	if (L.head->next) return FALSE;
 	return TURE;
 }
-int ListLength(LinkList L) {//è¿”å›çº¿æ€§é“¾è¡¨Lä¸­çš„å…ƒç´ ä¸ªæ•°
+int ListLength(LinkList L) {//·µ»ØÏßĞÔÁ´±íLÖĞµÄÔªËØ¸öÊı
 	return L.len;
 }
-Position GetHead(LinkList L) {//è¿”å›çº¿æ€§é“¾è¡¨Lä¸­å¤´ç»“ç‚¹çš„ä½ç½®
+Position GetHead(LinkList L) {//·µ»ØÏßĞÔÁ´±íLÖĞÍ·½áµãµÄÎ»ÖÃ
 	return L.head;
 }
-Position GetLast(LinkList L) {//è¿”å›çº¿æ€§é“¾è¡¨Lä¸­æœ€åä¸€ä¸ªèŠ‚ç‚¹çš„ä½ç½®
+Position GetLast(LinkList L) {//·µ»ØÏßĞÔÁ´±íLÖĞ×îºóÒ»¸ö½ÚµãµÄÎ»ÖÃ
 	return L.tail;
 }
-Position PriorPos(LinkList L, Link p) {//å·²çŸ¥pæŒ‡å‘çº¿æ€§é“¾è¡¨Lä¸­çš„ä¸€ä¸ªç»“ç‚¹ï¼Œè¿”å›pæ‰€æŒ‡ç»“ç‚¹çš„ç›´æ¥å‰é©±ä½ç½®ï¼Œæ— è¿”å›NULL
+Position PriorPos(LinkList L, Link p) {//ÒÑÖªpÖ¸ÏòÏßĞÔÁ´±íLÖĞµÄÒ»¸ö½áµã£¬·µ»ØpËùÖ¸½áµãµÄÖ±½ÓÇ°ÇıÎ»ÖÃ£¬ÎŞ·µ»ØNULL
 	if (p == L.head)
 		return NULL;
 	Link q = L.head;
 	while (q->next != p) q = q->next;
 	return q;
 }
-Position NextPos(LinkList L, Link p) {//å·²çŸ¥pæŒ‡å‘çº¿æ€§é“¾è¡¨Lä¸­çš„ä¸€ä¸ªç»“ç‚¹ï¼Œè¿”å›pæ‰€æŒ‡ç»“ç‚¹çš„ç›´æ¥åç»§ä½ç½®ï¼Œæ— è¿”å›NULL
+Position NextPos(LinkList L, Link p) {//ÒÑÖªpÖ¸ÏòÏßĞÔÁ´±íLÖĞµÄÒ»¸ö½áµã£¬·µ»ØpËùÖ¸½áµãµÄÖ±½Óºó¼ÌÎ»ÖÃ£¬ÎŞ·µ»ØNULL
 	if (p->next == NULL)
 		return NULL;
 	return p->next;
 }
-Status LocatePos(LinkList L, int i, Link &p) {//è¿”å›pæŒ‡ç¤ºçº¿æ€§é“¾è¡¨Lç¬¬iä¸ªç»“ç‚¹å¹¶è¿”å›OKï¼Œiå€¼ä¸åˆæ³•æ—¶è¿”å›ERROR
+Status LocatePos(LinkList L, int i, Link &p) {//·µ»ØpÖ¸Ê¾ÏßĞÔÁ´±íLµÚi¸ö½áµã²¢·µ»ØOK£¬iÖµ²»ºÏ·¨Ê±·µ»ØERROR
 	if (i < 1 || i > L.len) return ERROR;
 	p = L.head->next;
 	for (int j = 0; j < i; j++)
@@ -190,36 +190,36 @@ Status LocatePos(LinkList L, int i, Link &p) {//è¿”å›pæŒ‡ç¤ºçº¿æ€§é“¾è¡¨Lç¬¬iä¸
 	return OK;
 }
 
-/*void Directory() {//ç›®å½•æ˜¾ç¤º
-	cout << "è¯·é€‰æ‹©æ“ä½œï¼š" << endl
-		<< "1.è¾“å…¥" << " " << "2.è¾“å‡º" << " " << "3.æ’å…¥" << endl
-		<< "4.åˆ é™¤" << " " << "5.æŸ¥æ‰¾" << " " << "6.ç»“æŸ" << endl;
+/*void Directory() {//Ä¿Â¼ÏÔÊ¾
+	cout << "ÇëÑ¡Ôñ²Ù×÷£º" << endl
+		<< "1.ÊäÈë" << " " << "2.Êä³ö" << " " << "3.²åÈë" << endl
+		<< "4.É¾³ı" << " " << "5.²éÕÒ" << " " << "6.½áÊø" << endl;
 }
-Status FunctionCall(LinkList &L, int i) {//å‡½æ•°è°ƒç”¨
-										 //çœ‹çœ‹switch æ³ªå¥” = =
+Status FunctionCall(LinkList &L, int i) {//º¯Êıµ÷ÓÃ
+										 //¿´¿´switch Àá±¼ = =
 	int j = 0;
 	if (i == 1) {
-		cout << "è¯·è¾“å…¥æ•°æ®ä¸ªæ•°ï¼š\n";
+		cout << "ÇëÊäÈëÊı¾İ¸öÊı£º\n";
 		cin >> j;
-		cout << "è¯·ä¸€æ¬¡è¾“å…¥æ•°æ®ï¼š\n";
+		cout << "ÇëÒ»´ÎÊäÈëÊı¾İ£º\n";
 		Input_L(L, j);
 	}
 	if (i == 2) {
-		cout << "æ•°æ®ä¾æ¬¡ä¸ºï¼š" << endl;
+		cout << "Êı¾İÒÀ´ÎÎª£º" << endl;
 		Output_L(L);
 	}
 	if (i == 3) {
-		cout << "å»ºè®¾ä¸­..." << endl;
+		cout << "½¨ÉèÖĞ..." << endl;
 	}
 	if (i == 4) {
-		cout << "å»ºè®¾ä¸­..." << endl;
+		cout << "½¨ÉèÖĞ..." << endl;
 	}
 	if (i == 5) {
-		cout << "å»ºè®¾ä¸­..." << endl;
+		cout << "½¨ÉèÖĞ..." << endl;
 	}
 	return OK;
 }*/
-Status Input_L(LinkList &L, int i) {//æ¥å—å…ƒç´ 
+Status Input_L(LinkList &L, int i) {//½ÓÊÜÔªËØ
 	Link q, p;
 	q = L.head;
 	int j = i;
@@ -235,7 +235,7 @@ Status Input_L(LinkList &L, int i) {//æ¥å—å…ƒç´ 
 	L.len += i;
 	return OK;
 }
-Status Output_L(LinkList L) {//è¾“å‡ºå…ƒç´ 
+Status Output_L(LinkList L) {//Êä³öÔªËØ
 	Link q;
 	q = L.head->next;
 	while (q) {

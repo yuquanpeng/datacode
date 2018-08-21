@@ -1,16 +1,16 @@
 #include<stdio.h>
 #include<stdlib.h>
-/*é¡ºåºè¡¨çš„åŠ¨æ€åˆ†é…å®ç°
+/*Ë³Ğò±íµÄ¶¯Ì¬·ÖÅäÊµÏÖ
 */
-#define LIST_INIT_SIZE 100 //çº¿æ€§è¡¨å­˜å‚¨ç©ºé—´çš„åˆå§‹åˆ†é…é‡
-#define LISTINCREMENT 10//åˆ†é…å¢é‡
-typedef int ElemType;//çº¿æ€§è¡¨å­˜å‚¨çš„æ•°æ®ç±»å‹
+#define LIST_INIT_SIZE 100 //ÏßĞÔ±í´æ´¢¿Õ¼äµÄ³õÊ¼·ÖÅäÁ¿
+#define LISTINCREMENT 10//·ÖÅäÔöÁ¿
+typedef int ElemType;//ÏßĞÔ±í´æ´¢µÄÊı¾İÀàĞÍ
 
 typedef struct
 {
-	ElemType *elem; //å­˜å‚¨ç©ºé—´åŸºå€
-	int length; //å½“å‰é•¿åº¦
-	int listsize;   //å½“å‰åˆ†é…çš„å­˜å‚¨å®¹é‡
+	ElemType *elem; //´æ´¢¿Õ¼ä»ùÖ·
+	int length; //µ±Ç°³¤¶È
+	int listsize;   //µ±Ç°·ÖÅäµÄ´æ´¢ÈİÁ¿
 }sqList;
 
 void InitList_Sq(sqList *L);
@@ -19,7 +19,7 @@ void ClearList_Sq(sqList *L);
 int  ListEmpty_Sq(sqList L);
 int ListLength_Sq(sqList L);
 int GetElem_Sq(sqList L, int i, ElemType *e);
-//è‹¥cur_eæ˜¯Lçš„æ•°æ®å…ƒç´ ï¼Œä¸”ä¸æ˜¯ç¬¬ä¸€ä¸ªï¼Œåˆ™ç”¨pre_eè¿”å›ä»–çš„å‰é©±ï¼Œå¦åˆ™æ“ä½œå¤±è´¥
+//Èôcur_eÊÇLµÄÊı¾İÔªËØ£¬ÇÒ²»ÊÇµÚÒ»¸ö£¬ÔòÓÃpre_e·µ»ØËûµÄÇ°Çı£¬·ñÔò²Ù×÷Ê§°Ü
 int PriorElem_Sq(sqList L, ElemType cur_e, ElemType *pre_e);
 int NextElem_Sq(sqList L, ElemType cur_e, ElemType *next_e);
 void InsertList_Sq(sqList *L, int i, ElemType e);
@@ -27,33 +27,33 @@ void DeleteList_Sq(sqList *L, int i, ElemType *e);
 int Compare(ElemType ve1, ElemType ve2);
 int LocateListElem(sqList L, ElemType e);
 void TraverseList(sqList L);
-void UnionList_Sq(sqList *L, sqList Lb);   /* çº¿å½¢è¡¨çš„åˆå¹¶*/
-void MergeList(sqList La, sqList Lb, sqList *Lc); /*çº¿å½¢è¡¨çš„é¡ºåºåˆå¹¶*/
+void UnionList_Sq(sqList *L, sqList Lb);   /* ÏßĞÎ±íµÄºÏ²¢*/
+void MergeList(sqList La, sqList Lb, sqList *Lc); /*ÏßĞÎ±íµÄË³ĞòºÏ²¢*/
 
 void main()
 {
 	sqList L, La, Lc;
 	int i;
 	ElemType e;
-	InitList_Sq(&L);//åˆ›å»ºé“¾è¡¨
+	InitList_Sq(&L);//´´½¨Á´±í
 	InitList_Sq(&La);
 	InitList_Sq(&Lc);
 
 	for (i = 1; i <= 5; i++)
 	{
-		InsertList_Sq(&L, i, i);//åœ¨ç©ºè¡¨ä¸­æ’å…¥å…ƒç´ 
+		InsertList_Sq(&L, i, i);//ÔÚ¿Õ±íÖĞ²åÈëÔªËØ
 	}
-	printf("æ–°åˆ›å»ºçš„è¡¨L:");
+	printf("ĞÂ´´½¨µÄ±íL:");
 	TraverseList(L);
 	printf("/n");
 
-	InsertList_Sq(&L, 6, 6);//åœ¨è¡¨å°¾æ’å…¥6
-	printf("åœ¨Lè¡¨å°¾æ’å…¥ä¸€ä¸ªæ–°å…ƒç´ åï¼š");
+	InsertList_Sq(&L, 6, 6);//ÔÚ±íÎ²²åÈë6
+	printf("ÔÚL±íÎ²²åÈëÒ»¸öĞÂÔªËØºó£º");
 	TraverseList(L);
 	printf("/n");
 
 	DeleteList_Sq(&L, 6, &e);
-	printf("Lè¡¨åˆ é™¤ä¸€ä¸ªå…ƒç´ åï¼š");
+	printf("L±íÉ¾³ıÒ»¸öÔªËØºó£º");
 	TraverseList(L);
 	printf("/n");
 
@@ -61,11 +61,11 @@ void main()
 	{
 		InsertList_Sq(&La, i - 5, i);
 	}
-	printf("æ–°å»ºè¡¨Laï¼š");
+	printf("ĞÂ½¨±íLa£º");
 	TraverseList(La);
 	printf("/n");
 
-	printf("è”åˆLå’ŒLaï¼š");
+	printf("ÁªºÏLºÍLa£º");
 	UnionList_Sq(&L, La);
 	TraverseList(L);
 
@@ -78,22 +78,22 @@ void main()
 		InsertList_Sq(&La, i, 5* i);
 	}
 
-	printf("/næ–°å»ºè¡¨L:");
+	printf("/nĞÂ½¨±íL:");
 	TraverseList(L);
-	printf("/næ–°å»ºè¡¨Laï¼š");
+	printf("/nĞÂ½¨±íLa£º");
 	TraverseList(La);
 	MergeList(L, La, &Lc);
-	printf("/nMergeList è¡¨Lå’Œè¡¨Laï¼š");
+	printf("/nMergeList ±íLºÍ±íLa£º");
 	TraverseList(Lc);
 }
 
 void InitList_Sq(sqList *L)
 {
-	//æ„é€ ä¸€ä¸ªç©ºçš„çº¿æ€§è¡¨
+	//¹¹ÔìÒ»¸ö¿ÕµÄÏßĞÔ±í
 	L->elem = (ElemType *)malloc(LIST_INIT_SIZE * sizeof(ElemType));
 	if (!L->elem)
 	{
-		printf("é“¾è¡¨åˆ›å»ºå¤±è´¥/n");
+		printf("Á´±í´´½¨Ê§°Ü/n");
 		exit(1);
 	}
 	L->length = 0;
@@ -130,7 +130,7 @@ int GetElem_Sq(sqList L, int i, ElemType *e)
 {
 	if (i<1 && i >= L.length)
 	{
-		printf("ä½ç½®æŸ¥æ‰¾å¤±è´¥!!/n");
+		printf("Î»ÖÃ²éÕÒÊ§°Ü!!/n");
 		return 1;
 	}
 	*e = L.elem[i - 1];
@@ -179,7 +179,7 @@ void InsertList_Sq(sqList *L, int i, ElemType e)
 	ElemType *p, *q;
 	if (i<1 || i>L->length)
 	{
-		printf("æ’å…¥ç‚¹iå€¼è¶…æ ‡ é”™è¯¯");
+		printf("²åÈëµãiÖµ³¬±ê ´íÎó");
 		exit(1);
 	}
 	if (L->length >= L->listsize)
@@ -188,19 +188,19 @@ void InsertList_Sq(sqList *L, int i, ElemType e)
 
 		if (!newbase)
 		{
-			printf("æ–°å¢ç©ºé—´åˆ†é…é”™è¯¯!!/n");
+			printf("ĞÂÔö¿Õ¼ä·ÖÅä´íÎó!!/n");
 			exit(1);
 		}
-		L->elem = newbase;//æ–°åŸºå€
-		L->listsize = L->listsize + LISTINCREMENT;//å¢åŠ å­˜å‚¨å®¹é‡
+		L->elem = newbase;//ĞÂ»ùÖ·
+		L->listsize = L->listsize + LISTINCREMENT;//Ôö¼Ó´æ´¢ÈİÁ¿
 	}
-	q = &(L->elem[i - 1]);//æ’å…¥ä½ç½®
-	for (p = &(L->elem[L->length - 1]); p >= q; p--)//å…ƒç´ å³ç§»åŠ¨
+	q = &(L->elem[i - 1]);//²åÈëÎ»ÖÃ
+	for (p = &(L->elem[L->length - 1]); p >= q; p--)//ÔªËØÓÒÒÆ¶¯
 	{
 		*(p + 1) = *p;
 	}
-	*q = e;//æ’å…¥e
-	++L->length;//è¡¨å¢é•¿1
+	*q = e;//²åÈëe
+	++L->length;//±íÔö³¤1
 
 }
 
@@ -209,13 +209,13 @@ void DeleteList_Sq(sqList *L, int i, ElemType *e)
 	ElemType *p, *q;
 	if (i<1 || i>L->length)
 	{
-		printf("çº¿æ€§è¡¨åˆ é™¤å¤±è´¥ i å€¼è¶…æ ‡!!/n");
+		printf("ÏßĞÔ±íÉ¾³ıÊ§°Ü i Öµ³¬±ê!!/n");
 		exit(1);
 	}
-	p = &(L->elem[i - 1]);//pä¸ºåˆ é™¤ä½ç½®çš„å…ƒç´ 
-	*e = *p;//è¢«åˆ é™¤å…ƒç´ èµ‹å€¼ç»™e
-	q = &(L->elem[L->length - 1]);//è¡¨ä½å…ƒç´ çš„ä½ç½®
-	for (++p; p <= q; ++p)//å…ƒç´ å·¦ç§»
+	p = &(L->elem[i - 1]);//pÎªÉ¾³ıÎ»ÖÃµÄÔªËØ
+	*e = *p;//±»É¾³ıÔªËØ¸³Öµ¸øe
+	q = &(L->elem[L->length - 1]);//±íÎ»ÔªËØµÄÎ»ÖÃ
+	for (++p; p <= q; ++p)//ÔªËØ×óÒÆ
 	{
 		*(p - 1) = *p;
 	}
@@ -233,9 +233,9 @@ int Compare(ElemType ve1, ElemType ve2)
 
 int LocateListElem(sqList L, ElemType e)
 {
-	//åœ¨çº¿æ€§è¡¨Lä¸­æŸ¥æ‰¾ç¬¬ä¸€ä¸ªå€¼ä¸eæ»¡è¶³compareï¼ˆï¼‰çš„å…ƒç´ çš„ä½åº
+	//ÔÚÏßĞÔ±íLÖĞ²éÕÒµÚÒ»¸öÖµÓëeÂú×ãcompare£¨£©µÄÔªËØµÄÎ»Ğò
 	int i = 1;
-	ElemType *p = L.elem;//pçš„å€¼ä¸ºç¬¬ä¸€ä¸ªå…ƒç´ çš„å­˜å‚¨ä½ç½®
+	ElemType *p = L.elem;//pµÄÖµÎªµÚÒ»¸öÔªËØµÄ´æ´¢Î»ÖÃ
 	while (i <= L.length && !Compare(e, *p++))
 	{
 		++i;
@@ -251,14 +251,14 @@ void UnionList_Sq(sqList *L, sqList Lb)
 {
 	int i, L_len, Lb_len;
 	ElemType e;
-	L_len = L->length;//é•¿åº¦
+	L_len = L->length;//³¤¶È
 	Lb_len = Lb.length;
 	for (i = 1; i <= Lb.length; i++)
 	{
-		GetElem_Sq(Lb, i, &e);//è·å¾—Lbçš„ç¬¬iä¸ªå…ƒç´ ç»™e
+		GetElem_Sq(Lb, i, &e);//»ñµÃLbµÄµÚi¸öÔªËØ¸øe
 		if (LocateListElem(*L, e) == 0)
 		{
-			InsertList_Sq(L, ++L_len, e);//Laä¸­ä¸å­˜åœ¨e åˆ™æ’å…¥ä¹‹
+			InsertList_Sq(L, ++L_len, e);//LaÖĞ²»´æÔÚe Ôò²åÈëÖ®
 		}
 	}
 }
@@ -302,7 +302,7 @@ void TraverseList(sqList L)
 	int i;
 	if (ListEmpty_Sq(L) == 1)
 	{
-		printf("ç©ºè¡¨!!/n");
+		printf("¿Õ±í!!/n");
 		return;
 	}
 	for (i = 0; i<L.length; i++)

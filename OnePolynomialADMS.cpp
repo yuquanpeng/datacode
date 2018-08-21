@@ -3,83 +3,83 @@
 #define char ElemType
 using namespace std;
 
-typedef struct // é¡¹çš„è¡¨ç¤º,å¤šé¡¹å¼çš„é¡¹ä½œä¸º LinkList çš„æ•°æ®å…ƒç´  
+typedef struct // ÏîµÄ±íÊ¾,¶àÏîÊ½µÄÏî×÷Îª LinkList µÄÊı¾İÔªËØ 
 {
-	float coef; // ç³»æ•° 
-	int expn; // æŒ‡æ•° 
+	float coef; // ÏµÊı 
+	int expn; // Ö¸Êı 
 }term, ElemType;
 
-typedef struct LNode // ç»“ç‚¹ç±»å‹ 
+typedef struct LNode // ½áµãÀàĞÍ 
 {
 	ElemType data;
 	struct LNode *next;
 }LNode, *Link, *Position;
 
-typedef struct LinkList // é“¾è¡¨ç±»å‹ 
+typedef struct LinkList // Á´±íÀàĞÍ 
 {
-	Link head, tail; // åˆ†åˆ«æŒ‡å‘çº¿æ€§é“¾è¡¨ä¸­çš„å¤´ç»“ç‚¹å’Œæœ€åä¸€ä¸ªç»“ç‚¹ 
-	int len; // æŒ‡ç¤ºå½“å‰çº¿æ€§é“¾è¡¨ä¸­æ•°æ®å…ƒç´ çš„ä¸ªæ•° 
+	Link head, tail; // ·Ö±ğÖ¸ÏòÏßĞÔÁ´±íÖĞµÄÍ·½áµãºÍ×îºóÒ»¸ö½áµã 
+	int len; // Ö¸Ê¾µ±Ç°ÏßĞÔÁ´±íÖĞÊı¾İÔªËØµÄ¸öÊı 
 }LinkList;
 typedef LinkList polynomial;
 
 void InitList(LinkList &P);
-void CreatePolyn(polynomial &P, int m);//å»ºç«‹è¡¨ç¤ºä¸€å…ƒå¤šé¡¹å¼çš„æœ‰åºé“¾è¡¨ P 
-void DestroyPolyn(polynomial &P);//é”€æ¯ä¸€å…ƒå¤šé¡¹å¼ P 
-void PrintPolyn(polynomial P);//æ‰“å° 
-int PolyLength(polynomial P);//è¿”å›é¡¹æ•° 
-void AddPolyn(polynomial &Pa, polynomial &Pb);//ç›¸åŠ è¿ç®— 
-void MultiplyPolyn(polynomial &P, polynomial &Pa, polynomial &Pb);//ç›¸ä¹˜è¿ç®— 
-void SubtractPolyn(polynomial &Pa, polynomial &Pb);//ç›¸å‡è¿ç®— 
+void CreatePolyn(polynomial &P, int m);//½¨Á¢±íÊ¾Ò»Ôª¶àÏîÊ½µÄÓĞĞòÁ´±í P 
+void DestroyPolyn(polynomial &P);//Ïú»ÙÒ»Ôª¶àÏîÊ½ P 
+void PrintPolyn(polynomial P);//´òÓ¡ 
+int PolyLength(polynomial P);//·µ»ØÏîÊı 
+void AddPolyn(polynomial &Pa, polynomial &Pb);//Ïà¼ÓÔËËã 
+void MultiplyPolyn(polynomial &P, polynomial &Pa, polynomial &Pb);//Ïà³ËÔËËã 
+void SubtractPolyn(polynomial &Pa, polynomial &Pb);//Ïà¼õÔËËã 
 
 void InitList(polynomial &P)
 {
 	P.head = P.tail = (LNode*)malloc(sizeof(LNode));
 	if (P.head == NULL)///////////////////////
 	{
-		cout << "å‡ºé”™äº†48 ç¨‹åºç»ˆæ­¢" << endl;
+		cout << "³ö´íÁË48 ³ÌĞòÖÕÖ¹" << endl;
 		exit(-1);
 	}
 	P.head->next = NULL;
 	P.len = 0;
 }
-void CreatePolyn(polynomial &P, int m)//å»ºç«‹è¡¨ç¤ºä¸€å…ƒå¤šé¡¹å¼çš„æœ‰åºé“¾è¡¨ P 
+void CreatePolyn(polynomial &P, int m)//½¨Á¢±íÊ¾Ò»Ôª¶àÏîÊ½µÄÓĞĞòÁ´±í P 
 {
 	Position q, s;
-	term e;//ä¿å­˜é¡¹ 
+	term e;//±£´æÏî 
 	InitList(P);
-	cout << "è¯·ä¾æ¬¡è¾“å…¥" << m << "å¯¹ç³»æ•°ã€æŒ‡æ•°ï¼š" << endl;
+	cout << "ÇëÒÀ´ÎÊäÈë" << m << "¶ÔÏµÊı¡¢Ö¸Êı£º" << endl;
 	for (int i = 1; i <= m; i++)
 	{
-		cin >> e.coef >> e.expn;//ä¾æ¬¡æ¥å—è¾“å…¥çš„ç³»æ•°å’ŒæŒ‡æ•° 
+		cin >> e.coef >> e.expn;//ÒÀ´Î½ÓÊÜÊäÈëµÄÏµÊıºÍÖ¸Êı 
 		q = P.tail;
-		s = (LNode*)malloc(sizeof(LNode));//å†…å­˜åˆ†é…ä¸é”™è¯¯å¤„ç† 
+		s = (LNode*)malloc(sizeof(LNode));//ÄÚ´æ·ÖÅäÓë´íÎó´¦Àí 
 		if (s == NULL)
 		{
-			cout << "å‡ºé”™äº†68 ç¨‹åºç»ˆæ­¢" << endl;
+			cout << "³ö´íÁË68 ³ÌĞòÖÕÖ¹" << endl;
 			exit(-1);
 		}
-		s->data.coef = e.coef;//å°†æ•°æ®è½¬ç§»è‡³é“¾è¡¨ 
+		s->data.coef = e.coef;//½«Êı¾İ×ªÒÆÖÁÁ´±í 
 		s->data.expn = e.expn;
-		P.tail->next = s;//sç»“ç‚¹è¿æ¥è‡³P 
-		s->next = NULL;//ç½®ç©º 
-		P.tail = s;//é“¾æ¥ 
-		P.len++;//é•¿åº¦å¢åŠ  
+		P.tail->next = s;//s½áµãÁ¬½ÓÖÁP 
+		s->next = NULL;//ÖÃ¿Õ 
+		P.tail = s;//Á´½Ó 
+		P.len++;//³¤¶ÈÔö¼Ó 
 	}
-	cout<<"æ–°å»ºå¤šé¡¹å¼Y= ";
+	cout<<"ĞÂ½¨¶àÏîÊ½Y= ";
 	PrintPolyn(P); 
 }
 
-void DestroyPolyn(polynomial &P)//é”€æ¯ä¸€å…ƒå¤šé¡¹å¼ P 
+void DestroyPolyn(polynomial &P)//Ïú»ÙÒ»Ôª¶àÏîÊ½ P 
 {
-	free(P.head); //é‡Šæ”¾å¤´å°¾ç»“ç‚¹
+	free(P.head); //ÊÍ·ÅÍ·Î²½áµã
 	P.len = 0;
 }
 
-void PrintPolyn(polynomial P)//æ‰“å° 
+void PrintPolyn(polynomial P)//´òÓ¡ 
 {
 	if (P.len == 0)
 	{
-		cout << "ä½ è¿˜æ²¡åˆ›å»ºå¤šé¡¹å¼å“¦!" << endl;
+		cout << "Äã»¹Ã»´´½¨¶àÏîÊ½Å¶!" << endl;
 	}
 	else
 	{
@@ -92,30 +92,30 @@ void PrintPolyn(polynomial P)//æ‰“å°
 		cout << p->data.coef << "X" << "^" << p->data.expn << endl;
 	}
 }
-int PolyLength(polynomial P)//é¡¹æ•° 
+int PolyLength(polynomial P)//ÏîÊı 
 {
 	return P.len;
 }
-void AddPolyn(polynomial &Pa, polynomial &Pb)//ç›¸åŠ è¿ç®— 
+void AddPolyn(polynomial &Pa, polynomial &Pb)//Ïà¼ÓÔËËã 
 {
-	LNode *pa = Pa.head->next;//paæŒ‡å‘Paçš„å½“å‰ç»“ç‚¹ 
-	LNode *pb = Pb.head->next;//pbæŒ‡å‘Pbçš„å½“å‰ç»“ç‚¹ 
-	while (pa != NULL && pb != NULL)//paå’Œpbå‡ä¸ºéç©º 
+	LNode *pa = Pa.head->next;//paÖ¸ÏòPaµÄµ±Ç°½áµã 
+	LNode *pb = Pb.head->next;//pbÖ¸ÏòPbµÄµ±Ç°½áµã 
+	while (pa != NULL && pb != NULL)//paºÍpb¾ùÎª·Ç¿Õ 
 	{
-		if (pa->data.expn < pb->data.expn)//å¤šé¡¹å¼Paå½“å‰ç»“ç‚¹çš„æŒ‡æ•°å€¼å° 
+		if (pa->data.expn < pb->data.expn)//¶àÏîÊ½Paµ±Ç°½áµãµÄÖ¸ÊıÖµĞ¡ 
 		{	pa = pa->next;}
-		else if (pa->data.expn == pb->data.expn) //æŒ‡æ•°ç›¸ç­‰ 
+		else if (pa->data.expn == pb->data.expn) //Ö¸ÊıÏàµÈ 
 		{
-			//ä¿®æ”¹å¤šé¡¹å¼Paä¸­å½“å‰ç»“ç‚¹çš„ç³»æ•°å€¼ 
+			//ĞŞ¸Ä¶àÏîÊ½PaÖĞµ±Ç°½áµãµÄÏµÊıÖµ 
 			pa->data.coef = pa->data.coef + pb->data.coef;
 			pa = pa->next; pb = pb->next;
 		}
-		else if (pa->data.expn > pb->data.expn)//å¤šé¡¹å¼Pbå½“å‰ç»“ç‚¹çš„æŒ‡æ•°å€¼å°  
+		else if (pa->data.expn > pb->data.expn)//¶àÏîÊ½Pbµ±Ç°½áµãµÄÖ¸ÊıÖµĞ¡  
 		{
 			LNode *q = Pa.head;
-			while (q->next != pa)//æ‰¾åˆ°å½“å‰paç»“ç‚¹ 
+			while (q->next != pa)//ÕÒµ½µ±Ç°pa½áµã 
 			{	q = q->next;}
-			q->next = pb;//pbæ¥å…¥å½“å‰paç»“ç‚¹çš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹ 
+			q->next = pb;//pb½ÓÈëµ±Ç°pa½áµãµÄÏÂÒ»¸ö½Úµã 
 			pb = pb->next;
 			Pa.len++;
 		}
@@ -137,7 +137,7 @@ void AddPolyn(polynomial &Pa, polynomial &Pb)//ç›¸åŠ è¿ç®—
 		Pa.tail = Pb.tail;
 	}
 }
-void SubtractPolyn(polynomial &Pa, polynomial &Pb)//ç›¸å‡è¿ç®— 
+void SubtractPolyn(polynomial &Pa, polynomial &Pb)//Ïà¼õÔËËã 
 {
 	LNode *pa = Pa.head->next;
 	LNode *pb = Pb.head->next;
@@ -184,40 +184,40 @@ void SubtractPolyn(polynomial &Pa, polynomial &Pb)//ç›¸å‡è¿ç®—
 		Pa.tail = Pb.tail;
 	}
 }
-void MultiplyPolyn(polynomial &Pd, polynomial &Pa, polynomial &Pb)//ç›¸ä¹˜è¿ç®— 
+void MultiplyPolyn(polynomial &Pd, polynomial &Pa, polynomial &Pb)//Ïà³ËÔËËã 
 {
 	polynomial Pc;
 	InitList(Pd);
-	LNode *pa = Pa.head->next;//paæŒ‡å‘Paçš„å½“å‰ç»“ç‚¹ 
+	LNode *pa = Pa.head->next;//paÖ¸ÏòPaµÄµ±Ç°½áµã 
 	while (pa != NULL)
 	{
 		for (int i = 1; i <= Pa.len; i++)
 		{
 			InitList(Pc);
-			LNode *pc = Pc.head;//pcæŒ‡å‘Pcçš„å¤´ç»“ç‚¹ 
-			LNode *pb = Pb.head->next;//pdæŒ‡å‘Pdçš„å½“å‰ç»“ç‚¹ 
+			LNode *pc = Pc.head;//pcÖ¸ÏòPcµÄÍ·½áµã 
+			LNode *pb = Pb.head->next;//pdÖ¸ÏòPdµÄµ±Ç°½áµã 
 			for (int j = 1; j <= Pb.len; j++)
 			{
 				LNode *s = (LNode *)malloc(sizeof(LNode));
-				if (s == NULL)//å†…å­˜åˆ†é…å¤±è´¥æŠ¥é”™å¤„ç† 
+				if (s == NULL)//ÄÚ´æ·ÖÅäÊ§°Ü±¨´í´¦Àí 
 				{
-					cout << "å‡ºé”™äº†212 ç¨‹åºç»ˆæ­¢" << endl;
+					cout << "³ö´íÁË212 ³ÌĞòÖÕÖ¹" << endl;
 					exit(-1);
 				}
-				//ç³»æ•°ç›¸ä¹˜ æŒ‡æ•°ç›¸åŠ  
+				//ÏµÊıÏà³Ë Ö¸ÊıÏà¼Ó 
 				s->data.coef = pa->data.coef * pb->data.coef;
 				s->data.expn = pa->data.expn + pb->data.expn;
-				pc->next = s;//å°†sç»“ç‚¹çš„æ•°æ®é“¾æ¥åˆ°pc 
-				s->next = NULL;//nextç½®ç©º 
+				pc->next = s;//½«s½áµãµÄÊı¾İÁ´½Óµ½pc 
+				s->next = NULL;//nextÖÃ¿Õ 
 				pc = s;
-				pb = pb->next;//pbä¸‹ç§» 
-				Pc.len++;//pcé•¿åº¦å¢åŠ  
+				pb = pb->next;//pbÏÂÒÆ 
+				Pc.len++;//pc³¤¶ÈÔö¼Ó 
 			}
-			Pc.tail = pb;//Pcå°¾æŒ‡é’ˆæŒ‡å‘pbçš„å½“å‰ç»“ç‚¹ 
+			Pc.tail = pb;//PcÎ²Ö¸ÕëÖ¸ÏòpbµÄµ±Ç°½áµã 
 			AddPolyn(Pd, Pc);
-			free(Pc.head);//é‡Šæ”¾æ— å…³å†…å­˜ 
+			free(Pc.head);//ÊÍ·ÅÎŞ¹ØÄÚ´æ 
 			free(Pc.tail);
-			pa = pa->next;//ä¸€æ¬¡å¾ªç¯ç»“æŸ paä¸‹ç§» 
+			pa = pa->next;//Ò»´ÎÑ­»·½áÊø paÏÂÒÆ 
 		}
 	}
 }
@@ -233,19 +233,19 @@ int main()
 	int select = 1;
 	while (select)
 	{
-		cout << "*********é€‰é¡¹å¡*********" << endl;
-		cout << "1 -> åˆ›å»ºä¸€å…ƒå¤šé¡¹å¼ " << endl;
-		cout << "2 -> é”€æ¯ä¸€å…ƒå¤šé¡¹å¼" << endl;
-		cout << "3 -> æ‰“å°ä¸€å…ƒå¤šé¡¹å¼" << endl;
-		cout << "4 -> ä¸€å…ƒå¤šé¡¹å¼ç›¸åŠ " << endl;
-		cout << "5 -> ä¸€å…ƒå¤šé¡¹å¼ç›¸å‡" << endl;
-		cout << "6 -> ä¸€å…ƒå¤šé¡¹å¼ç›¸ä¹˜" << endl;
-		cout << "0 -> é€€å‡ºç¨‹åº" << endl;
-		cout << "è¯·é€‰æ‹©ç¼–å·:";
+		cout << "*********Ñ¡Ïî¿¨*********" << endl;
+		cout << "1 -> ´´½¨Ò»Ôª¶àÏîÊ½ " << endl;
+		cout << "2 -> Ïú»ÙÒ»Ôª¶àÏîÊ½" << endl;
+		cout << "3 -> ´òÓ¡Ò»Ôª¶àÏîÊ½" << endl;
+		cout << "4 -> Ò»Ôª¶àÏîÊ½Ïà¼Ó" << endl;
+		cout << "5 -> Ò»Ôª¶àÏîÊ½Ïà¼õ" << endl;
+		cout << "6 -> Ò»Ôª¶àÏîÊ½Ïà³Ë" << endl;
+		cout << "0 -> ÍË³ö³ÌĞò" << endl;
+		cout << "ÇëÑ¡Ôñ±àºÅ:";
 		cin >> select;
 		switch (select)
 		{
-		case 1: cout << "è¯·è¾“å…¥ç¬¬ä¸€ä¸ªä¸€å…ƒå¤šé¡¹å¼çš„é¡¹æ•°:";
+		case 1: cout << "ÇëÊäÈëµÚÒ»¸öÒ»Ôª¶àÏîÊ½µÄÏîÊı:";
 			cin >> m;
 			CreatePolyn(poly, m); break;
 
@@ -253,49 +253,49 @@ int main()
 
 		case 3: PrintPolyn(poly); break;
 
-		case 4: cout << "è¯·è¾“å…¥ç¬¬ä¸€ä¸ªä¸€å…ƒå¤šé¡¹å¼çš„é¡¹æ•°:";
+		case 4: cout << "ÇëÊäÈëµÚÒ»¸öÒ»Ôª¶àÏîÊ½µÄÏîÊı:";
 			cin >> m;
 			CreatePolyn(poly1, m);
-			cout << "è¯·è¾“å…¥ç¬¬äºŒä¸ªä¸€å…ƒå¤šé¡¹å¼çš„é¡¹æ•°:";
+			cout << "ÇëÊäÈëµÚ¶ş¸öÒ»Ôª¶àÏîÊ½µÄÏîÊı:";
 			cin >> m;
 			CreatePolyn(poly2, m);
-			cout << "å¤šé¡¹å¼ Y1= ";//è¾“å‡ºå¤šé¡¹å¼ 
+			cout << "¶àÏîÊ½ Y1= ";//Êä³ö¶àÏîÊ½ 
 			PrintPolyn(poly1);
-			cout << "å¤šé¡¹å¼ Y2= ";
+			cout << "¶àÏîÊ½ Y2= ";
 			PrintPolyn(poly2);
 			AddPolyn(poly1, poly2);
-			cout << "ç›¸åŠ å Y= ";
+			cout << "Ïà¼Óºó Y= ";
 			PrintPolyn(poly1); break;
 
-		case 5: cout << "è¯·è¾“å…¥ç¬¬ä¸€ä¸ªä¸€å…ƒå¤šé¡¹å¼çš„é¡¹æ•°:";
+		case 5: cout << "ÇëÊäÈëµÚÒ»¸öÒ»Ôª¶àÏîÊ½µÄÏîÊı:";
 			cin >> m;
 			CreatePolyn(poly1, m);
-			cout << "è¯·è¾“å…¥ç¬¬äºŒä¸ªä¸€å…ƒå¤šé¡¹å¼çš„é¡¹æ•°:";
+			cout << "ÇëÊäÈëµÚ¶ş¸öÒ»Ôª¶àÏîÊ½µÄÏîÊı:";
 			cin >> m;
 			CreatePolyn(poly2, m);
-			cout << "å¤šé¡¹å¼ Y1= ";//è¾“å‡ºå¤šé¡¹å¼
+			cout << "¶àÏîÊ½ Y1= ";//Êä³ö¶àÏîÊ½
 			PrintPolyn(poly1);
-			cout << "å¤šé¡¹å¼ Y2= ";
+			cout << "¶àÏîÊ½ Y2= ";
 			PrintPolyn(poly2);
 			SubtractPolyn(poly1, poly2);
-			cout << "ç›¸å‡å Y= ";
+			cout << "Ïà¼õºó Y= ";
 			PrintPolyn(poly1); break;
 
-		case 6: cout << "è¯·è¾“å…¥ç¬¬ä¸€ä¸ªä¸€å…ƒå¤šé¡¹å¼çš„é¡¹æ•°:";
+		case 6: cout << "ÇëÊäÈëµÚÒ»¸öÒ»Ôª¶àÏîÊ½µÄÏîÊı:";
 			cin >> m;
 			CreatePolyn(poly1, m);
-			cout << "è¯·è¾“å…¥ç¬¬äºŒä¸ªä¸€å…ƒå¤šé¡¹å¼çš„é¡¹æ•°:";
+			cout << "ÇëÊäÈëµÚ¶ş¸öÒ»Ôª¶àÏîÊ½µÄÏîÊı:";
 			cin >> m;
 			CreatePolyn(poly2, m);
-			cout << "å¤šé¡¹å¼ Y1= ";//è¾“å‡ºå¤šé¡¹å¼
+			cout << "¶àÏîÊ½ Y1= ";//Êä³ö¶àÏîÊ½
 			PrintPolyn(poly1);
-			cout << "å¤šé¡¹å¼ Y2= ";
+			cout << "¶àÏîÊ½ Y2= ";
 			PrintPolyn(poly2);
 			MultiplyPolyn(poly, poly1, poly2);
-			cout << "ç›¸ä¹˜å Y= ";
+			cout << "Ïà³Ëºó Y= ";
 			PrintPolyn(poly); break;
 		case 0:
-			cout << "ç¨‹åºé€€å‡º" << endl;
+			cout << "³ÌĞòÍË³ö" << endl;
 			exit(1);
 		default:break;
 		}
