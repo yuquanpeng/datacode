@@ -70,13 +70,45 @@ void R_Print(Linklist L){
         minpre指向*minp结点的前驱 初始值为pre。一边扫描一边比较，若p->data < minp->data
         则将p，pre分别赋值给minp minpre，否则继续扫描
 */
-
+LinkList Delete_Min(Linklist &L){
+	LNode *pre = L,*p=pre->next;
+	LNode *monpre=pre,*minp=p;
+	while(p!=NULL){
+		if(p->data < minp->data){
+			minp = p;
+   			minpre = pre;
+		}
+		pre = p;
+  		p=p->next;
+	}    
+   	minpre->next = minp->next;
+  	free(minp);
+   	return L;
+}
 /*
 问题：带头结点 单链表 就地逆置
 算法思想：一 头结点摘下 然后从第一个结点开始，依次前插入到头结点的后面 直到最后一个结点为止
 		二：修改后 调整指针
 */
-
+Linklist Reserve_1(Linklist &L){
+	LNode *p,*r;
+	p = L->next;
+	L->next = NULL;
+	while(p!=NULL){
+   		r = p->next;
+       p->next = L->next;
+       L->next = p;
+       p = r;     
+   }
+   return L;
+}
+Linlist Resever_2(Linklist &L){
+	LNode *pre,*p=L->next,*r=p->next;
+	p->next = NULL;
+	while(r!=NULL){
+    
+   }        
+}
 /*
 问题：头结点 单链表 使元素递增排序
 算法思想：直接插入排序  先构成只含一个数据结点的有序单链表，然后依次扫描单链表中剩下的结点*p
