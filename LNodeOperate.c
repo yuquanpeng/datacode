@@ -102,24 +102,45 @@ Linklist Reserve_1(Linklist &L){
    }
    return L;
 }
-Linlist Resever_2(Linklist &L){
-	LNode *pre,*p=L->next,*r=p->next;
+Linklist Reserve_2(Linklist &L){
+	LNode *pre,*p = L->next,*r = p->next;
 	p->next = NULL;
-	while(r!=NULL){
-    
-   }        
+	while(r != NULL){
+		pre = p;
+		p = r;
+		r = r->next;
+		p-next = pre;
+	}
+	L->next = p;
+	return L;
 }
 /*
 问题：头结点 单链表 使元素递增排序
 算法思想：直接插入排序  先构成只含一个数据结点的有序单链表，然后依次扫描单链表中剩下的结点*p
 		在有序表中通过比较*p的前驱结点*pre 然后将*p插入到*pre之后
 */
-
+void Sort(Linklist &L){
+	LNode *p = L->next,*pre;
+	LNode *r = p->next;
+	p->next = NULL;
+	p = r;
+	while(p !=NULL){
+		r = p->next;
+		pre = L;
+		while(pre->next != NULL && pre->next->data < p->data)
+			pre = pre->next;
+		p->next = pre->next;
+		pre->next = p;
+		p = r;
+	}
+}
 /*
-问题：
-算法思想：
+问题：带有表头 单链表 数值无序 删除表中所有介于给定两个值之间的元素的元素（若存在）
+算法思想：逐个节点检查 执行删除
 */
-
+void RangeDelete(Linklist &L,int min,int max){
+	
+}
 /*
 问题：
 算法思想：
