@@ -1,9 +1,9 @@
 #include <stdio.h> 
 #include <malloc.h> 
 typedef struct node{ 
-                    int data; 
-                    struct node *lchild,*rchild; 
-                    }*treetp,tree; 
+  int data; 
+  struct node *lchild,*rchild; 
+  }*treetp,tree; 
 treetp create (treetp t,int c); 
 void print1(treetp); 
 void print2(treetp); 

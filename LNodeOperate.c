@@ -458,3 +458,27 @@ void Del_All(LinkList &L){
 	free(L);
 }
 
+DLinkList Locate(DLinkList &L,ElemType x){
+	//本算法先查找数据x 查找成功时结点的访问频度+1
+	//最后将该结点按频度递减插入到链表中合适的位置
+	DNode *p = L->next,*q;
+	while(p && p->data != x){
+		p = p->next;
+	}
+	if(!p){
+		printf("不存在值为x的节点\n");
+		exit(0);
+	}else{
+		p->freq++;
+		p->next->pred = p->pred;
+		p->pred->next = p->next;
+		q = p->pred;
+		while(q!=L&&q->pred <= p->fred)
+			q = q->pred;
+		p->next = q->next;
+		q->next->pred = p;
+		p->pred = q;
+		q->next = p;
+	}
+	return p;
+}
